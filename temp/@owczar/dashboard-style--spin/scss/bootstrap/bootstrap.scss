@@ -1,0 +1,669 @@
+@import "./variables";
+// TODO: Typically here should be imported
+// only @import "~bootstrap/scss/bootstrap"
+// but "bootstrap/scss/root" isn't compiling in
+// some cases on OSX Jekyll - needs some investigating
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+//@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/media";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/print";
+
+@import "./helpers";
+
+/* Modifications */
+.custom-control-empty {
+    &.custom-radio,
+    &.custom-checkbox {
+        .custom-control-label {
+            display: block;
+            &::after,
+            &::before {
+                left: -1.25rem;
+            }
+        }
+    }
+}
+
+.input-group-append,
+.input-group-prepend {
+    .form-check-input[type=radio],
+    .form-check-input[type=checkbox] {
+        margin: 0;
+        position: static;
+    }
+}
+
+// Responsive to CARD COLUMNS (Optional from Boosttrap)
+// ---------------------------------------------
+.card-columns {
+    @include media-breakpoint-only(xl) {
+        column-count: 3;
+    }
+    @include media-breakpoint-only(lg) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(sm) {
+        column-count: 1;
+    }
+}
+
+// Variation Line TABS (demo: cards/cards-headers.html #2.07a )
+// ---------------------------------------------
+.tabs-line .nav-tabs .nav-link {
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+}
+
+.tabs-line .nav-tabs .nav-link i {
+    color: $gray-200;
+}
+
+.tabs-line .nav-tabs .nav-link .ml-2 {
+    color: $text-muted;
+}
+
+.tabs-line .nav-tabs .nav-link.active {
+    background-color: transparent;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    border-bottom: 1px solid $primary;
+    box-shadow: inset 2px -6px 0px -3px $primary;
+}
+
+.tabs-line .nav-tabs .nav-link.active:hover {
+    background-color: transparent;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    border-bottom: 1px solid $primary;
+    box-shadow: inset 2px -6px 0px -3px $primary;
+}
+
+.tabs-line .nav-tabs .nav-link:hover {
+    background-color: transparent;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    border-bottom: 1px solid $gray-400;
+    box-shadow: inset 2px -6px 0px -3px $gray-400;
+}
+
+// Overwritten MODALS in Bootstrap
+// ---------------------------------------------
+.modal-header {
+    border-bottom: 0px solid transparent;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+}
+.modal-body {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.modal-footer {
+    border-top: 0px solid transparent;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+// MODALS: "Interface/MODALS (ALERTS)" section: 4 
+// ---------------------------------------------
+// Modal ALERT DANGER
+.modal-danger .modal-text {
+    color: lighten($danger,27%) !important;
+}
+.modal-danger .modal-body > h6 {
+    color: $white !important;
+}
+.modal-danger .modal-header > button {
+    color: $white !important;
+}
+.modal-danger .modal-body .modal-icon {
+    color: lighten($danger,20%) !important;
+}
+.modal-danger .modal-body,
+.modal-danger .modal-header {
+    background-color: $danger !important;
+}
+.modal-danger .modal-content {
+    border-color: $danger !important;
+}
+.modal-danger .modal-footer {
+    background-color: $danger !important;
+}
+// Modal ALERT PRIMARY
+.modal-primary .modal-text {
+    color: lighten($primary,27%) !important;
+}
+.modal-primary .modal-body > h6 {
+    color: $white !important;
+}
+.modal-primary .modal-header > button {
+    color: $white !important;
+}
+.modal-primary .modal-body .modal-icon {
+    color: lighten($primary,20%) !important;
+}
+.modal-primary .modal-body,
+.modal-primary .modal-header {
+    background-color: $primary !important;
+}
+.modal-primary .modal-content {
+    border-color: $primary !important;
+}
+.modal-primary .modal-footer {
+    background-color: $primary !important;
+}
+// Modal ALERT SUCCESS
+.modal-success .modal-text {
+    color: lighten($success,27%) !important;
+}
+.modal-success .modal-body > h6 {
+    color: $white !important;
+}
+.modal-success .modal-header > button {
+    color: $white !important;
+}
+.modal-success .modal-body .modal-icon {
+    color: lighten($success,20%) !important;
+}
+.modal-success .modal-body,
+.modal-success .modal-header {
+    background-color: $success !important;
+}
+.modal-success .modal-content {
+    border-color: $success !important;
+}
+.modal-success .modal-footer {
+    background-color: $success !important;
+}
+// Modal ALERT INFO
+.modal-info .modal-text {
+    color: lighten($info,27%) !important;
+}
+.modal-info .modal-body > h6 {
+    color: $white !important;
+}
+.modal-info .modal-header > button {
+    color: $white !important;
+}
+.modal-info .modal-body .modal-icon {
+    color: lighten($info,20%) !important;
+}
+.modal-info .modal-body,
+.modal-info .modal-header {
+    background-color: $info !important;
+}
+.modal-info .modal-content {
+    border-color: $info !important;
+}
+.modal-info .modal-footer {
+    background-color: $info !important;
+}
+// Modal ALERT WARNING
+.modal-warning .modal-text {
+    color: lighten($warning,27%) !important;
+}
+.modal-warning .modal-body > h6 {
+    color: $white !important;
+}
+.modal-warning .modal-header > button {
+    color: $white !important;
+}
+.modal-warning .modal-body .modal-icon {
+    color: lighten($warning,20%) !important;
+}
+.modal-warning .modal-body,
+.modal-warning .modal-header {
+    background-color: $warning !important;
+}
+.modal-warning .modal-content {
+    border-color: $warning !important;
+}
+.modal-warning .modal-footer {
+    background-color: $warning !important;
+}
+// Modal ALERT DARK
+.modal-dark .modal-text {
+    color: $gray-300 !important;
+}
+.modal-dark .modal-body > h6 {
+    color: $dark !important;
+}
+.modal-dark .modal-header > button {
+    color: $dark !important;
+}
+.modal-dark .modal-body .modal-icon {
+    color: $gray-300 !important;
+}
+.modal-dark .modal-body,
+.modal-dark .modal-header {
+    background-color: $white !important;
+}
+.modal-dark .modal-content {
+    border-color: $white !important;
+}
+.modal-dark .modal-footer {
+    background-color: $white !important;
+}
+
+// MODALS: "Interface/MODALS (OUTLINES)" section: 3 
+// ---------------------------------------------
+// Modal ALERT PRIMARY
+.modal-outline-primary .modal-content {
+    border-color: $primary !important;
+}
+.modal-outline-primary .modal-content h6 {
+    color: $primary !important;
+}
+// Modal ALERT DANGER
+.modal-outline-danger .modal-content {
+    border-color: $danger !important;
+}
+.modal-outline-danger .modal-content h6 {
+    color: $danger !important;
+}
+// Modal ALERT INFO
+.modal-outline-info .modal-content {
+    border-color: $info !important;
+}
+.modal-outline-info .modal-content h6 {
+    color: $info !important;
+}
+// Modal ALERT SUCCESS
+.modal-outline-success .modal-content {
+    border-color: $success !important;
+}
+.modal-outline-success .modal-content h6 {
+    color: $success !important;
+}
+// Modal ALERT WARNING
+.modal-outline-warning .modal-content {
+    border-color: $warning !important;
+}
+.modal-outline-warning .modal-content h6 {
+    color: $warning !important;
+}
+// Modal ALERT DARK
+.modal-outline-dark .modal-content {
+    border-color: $dark !important;
+}
+.modal-outline-dark .modal-content h6 {
+    color: $dark !important;
+}
+
+// Override BADGE in Bootstrap
+// ---------------------------- 
+.badge {
+ font-size: 72% !important;
+ letter-spacing: 0.4px;
+ padding-left: 10px;
+ padding-right: 10px;
+ }
+
+// Override Borders CARDS in Bootstrap
+// ------------------------------------
+ .card {
+    border: 0px solid;
+ }
+
+ // Override BUTTON > ICON in Bootstrap
+ // ------------------ 
+ .btn .fa-angle-down {
+    color: $body-color;
+ }
+
+ // Import FONT "Roboto" to global Bootstrap
+ // -----------------------------------------
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+
+ // Override BACKGROUND as Gradient in Bootstrap
+ // ---------------------------------------------
+body {
+background: linear-gradient(180deg, #3f3f3f 0%, #181818 100%) no-repeat 0% 0%/100% 400px, #181818 repeat 100% 100%;
+}
+
+ // Override CODE  in Bootstrap
+ // ---------------------------------------------
+ code {
+    background: $gray-600 !important;
+ }
+
+  // Override CARD-FOTER in Bootstrap
+ // ---------------------------------------------
+ .card-footer {
+    background: transparent !important;
+ }
+
+ // Overwritten PILLS in Bootstrap
+// ---------------------------------------------
+// 1. IDLE > Icon
+.nav-pills .nav-item .nav-link i {
+    color: $body-color;
+}
+// 2. ACTIVE > Icon
+.nav-pills .nav-item .nav-link.active i {
+    color: $white;
+}
+// 1. IDLE > .SMALL
+.nav-pills .nav-item .nav-link .small {
+    color: $body-color;
+}
+// 2. ACTIVE > .SMALL
+.nav-pills .nav-item .nav-link.active .small {
+    color: $white;
+}
+
+
+// Overwritten DROPDOWN MENU > ICON in Bootstrap
+// ---------------------------------------------
+// 1. IDLE > Icon
+.dropdown .dropdown-menu .dropdown-item i
+  {
+    color: $text-muted !important;
+}
+// 2. ACTIVE > Icon
+.dropdown .dropdown-menu .dropdown-item.active i
+  {
+    color: $white !important;
+}
+    
+
+// Overwritten MODALS in Bootstrap
+// ---------------------------------------------
+.modal-header {
+    border-bottom: 0px solid transparent;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+}
+.modal-body {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.modal-footer {
+    border-top: 0px solid transparent;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+// Override TABLE > TH in Bootstrap
+// -----------------------------
+th {
+    font-size: 12px;
+    color: $white;
+    font-weight: 500 !important;
+}
+
+
+// TABLE CONTEXTUAL Colors Overrides
+// ---------------------------------------------
+.table-warning,
+.table-warning > th,
+.table-warning > td {
+    background-color: none;
+}
+.table-hover .table-warning:hover {
+    > th,
+    > td {
+        background-color: lighten(transparent, 10%);
+    }
+}
+.table-danger,
+.table-danger > th,
+.table-danger > td {
+    background-color: none;
+}
+.table-hover .table-danger:hover {
+    > th,
+    > td {
+        background-color: lighten(transparent, 10%);
+    }
+}
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+    background-color: none;
+}
+.table-hover .table-primary:hover {
+    > th,
+    > td {
+        background-color: lighten(transparent, 10%);
+    }
+}
+.table-info,
+.table-info > th,
+.table-info > td {
+    background-color: none;
+}
+.table-hover .table-info:hover {
+    > th,
+    > td {
+        background-color: lighten(transparent, 10%);
+    }
+}
+.table-success,
+.table-success > th,
+.table-success > td {
+    background-color: none;
+}
+.table-hover .table-success:hover {
+    > th,
+    > td {
+        background-color: lighten(transparent, 10%);
+    }
+}
+
+// ALERTS Overrides
+// ---------------------------------------------
+// Headings
+.alert-primary .alert-heading {
+    color: $white;
+}
+.alert-danger .alert-heading {
+    color: $white;
+}
+.alert-info .alert-heading {
+    color: $white;
+}
+.alert-warning .alert-heading {
+    color: $white;
+}
+.alert-success .alert-heading {
+    color: $white;
+}
+.alert-dark .alert-heading {
+    color: $white;
+}
+// ------------------------
+// Icons
+.alert-primary .alert-icon {
+    color: none;
+}
+.alert-danger .alert-icon {
+    color: none;
+}
+.alert-info .alert-icon {
+    color: none;
+}
+.alert-warning .alert-icon {
+    color: none;
+}
+.alert-success .alert-icon {
+    color: none;
+}
+.alert-dark .alert-icon {
+    color: none;
+}
+// ------------------------
+// Background Icons
+.alert-primary .alert-bg-icon {
+    color: lighten($primary, 20%);
+}
+.alert-danger .alert-bg-icon {
+    color: lighten($danger, 20%);
+}
+.alert-info .alert-bg-icon {
+    color: lighten($info, 20%);
+}
+.alert-warning .alert-bg-icon {
+    color: lighten($warning, 20%);
+}
+.alert-success .alert-bg-icon {
+    color: lighten($success, 20%);
+}
+.alert-dark .alert-bg-icon {
+    color: lighten($dark, 20%);
+}
+// ------------------------
+// Backgrounds
+.alert-primary {
+    background-color: $primary;
+    border-color: transparent;
+    color: lighten($primary, 25%);
+}
+.alert-danger {
+    background-color: $danger;
+    border-color: transparent;
+    color: lighten($danger, 25%);
+}
+.alert-info {
+    background-color: $info;
+    border-color: transparent;
+    color: lighten($info, 26%);
+}
+.alert-warning {
+    background-color: $warning;
+    border-color: transparent;
+    color: lighten($warning, 26%);
+}
+.alert-success {
+    background-color: $success;
+    border-color: transparent;
+    color: lighten($success, 26%);
+}
+.alert-dark {
+    background-color: $dark;
+    border-color: transparent;
+    color: lighten($dark, 24%);
+}
+
+// Overwritten CARD + TABLE (BORDERS) in Bootstrap
+// ---------------------------------------------
+.card .table:not(.table-dark) {
+    th {
+        border-bottom-color: $gray-800 !important;
+    }
+    td,th {
+        border-top-color: $gray-800 !important;
+    }
+    &.table-bordered {
+        th,td {
+            border-color: $gray-800 !important;
+        }
+    }
+    &.table-hover {
+        tr:hover {
+            background-color: lighten($black, 2%);
+        }
+    }
+
+} 
+
+// Button SWITCH VERSION (Dropdown) in Sidebar
+// ---------------------------------------------
+.btn-switch-version:hover {
+    text-decoration: none !important;
+}
+.btn-switch-version:hover .fa-angle-down,
+.btn-switch-version:hover .fa-angle-up,
+ {
+    color: $white !important;
+}
+.btn-switch-version .fa {
+    color: $body-color !important;
+}
+.btn-switch-version {
+    color: $white !important;
+}
+.btn-switch-version .small {
+    color: $body-color !important;
+}
+
+// Button PROFILE (Dropdown) in Sidebar
+// ---------------------------------------------
+.btn-profile:hover {
+    text-decoration: none !important;
+}
+.btn-profile .fa-angle-down,
+.btn-profile .fa-angle-up {
+    color: $body-color !important;
+}
+.btn-profile:hover .fa-angle-down,
+.btn-profile:hover .fa-angle-up {
+    color: $white !important;
+}
+.btn-profile:hover {
+    color: $white !important;
+}
+.btn-profile .small {
+    color: $body-color !important;
+}
+
+// Form Control Overrides
+// ---------------------------------------------
+.form-control {
+    &:focus {
+        color: $gray-800;
+        background-color: $gray-100;
+        border-color: $primary;
+
+        // Focused Placeholder
+        &::placeholder {
+            color: $gray-500;
+        }
+    }
+}

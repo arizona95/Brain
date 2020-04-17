@@ -1,0 +1,25 @@
+.cardBody2 {
+  height: 35vh;
+  width: 22vw;
+  overflow-y: scroll;
+}
+
+.cardBody1 {
+  height: 35vh;
+  width: 27vw;
+  overflow-y: scroll;
+}
+
+input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.cardBody {
+  background-color: #bbbbbb;
+}
+
+::-webkit-scrollbar {display:none;}

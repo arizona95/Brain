@@ -1,0 +1,25 @@
+@import "./../variables.scss";
+
+/* React Toggle Overrides */
+.react-toggle-track {
+    .fa {
+        font-size: 12px;
+    }
+}
+
+.react-toggle-track {
+	background-color: $gray-700 !important;
+}
+
+// Circle White DISABLED
+.react-toggle-thumb {
+	border: 1px solid $gray-700 !important;	
+}
+// Circle White ENABLED
+.react-toggle--checked .react-toggle-thumb {
+	border: 1px solid $success !important;	
+}
+
+.react-toggle--checked .react-toggle-track {
+	background-color: $success !important;
+}

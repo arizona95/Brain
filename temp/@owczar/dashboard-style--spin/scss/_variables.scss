@@ -1,0 +1,162 @@
+@import "./bootstrap/variables";
+
+// Sidebar Styling
+// =============================================
+$sidebar-default-width: 250px;
+$sidebar-slim-width: 60px;
+$sidebar-slim-submenu-width: 250px;
+$sidebar-background: $black;
+$sidebar-overlay-transition: 300ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+
+// Sidebar Menu Styling
+// =============================================
+$sidebar-menu-color: $primary;
+$sidebar-menu-highlight-bg: none;
+$sidebar-menu-highlight-color: $white;
+
+// Default Top Level
+@mixin sidebar-menu-item {
+    color: $body-color;
+    >i:first-child {
+        color: $gray-500;
+    } 
+    &::after {
+        color: $gray-500;
+    }
+}
+@mixin sidebar-menu-item--active {
+    background-color: transparent;
+    box-shadow: 3px 0 0 0 $primary inset,0 -1px 0 0 transparent inset,0 1px 0 0 transparent inset;
+
+    color: $sidebar-menu-highlight-color;
+
+    > i:first-child {
+        color: $sidebar-menu-highlight-color;
+    }
+
+    &::after {
+        color: $sidebar-menu-highlight-color;
+    }
+}
+@mixin sidebar-menu-item--hover {
+    @include sidebar-menu-item--active;
+}
+
+// Default Submenus
+@mixin sidebar-submenu-item {
+    @include sidebar-menu-item;                 // Note: Inherit from top level
+}
+@mixin sidebar-submenu-item--active {
+    @include sidebar-menu-item--active;         // Note: Inherit from top level
+}
+@mixin sidebar-submenu-item--hover {
+    @include sidebar-submenu-item--active;
+}
+
+// Slim Top Level
+@mixin sidebar-slim-menu-item {}                // Note: Keep as in Default
+@mixin sidebar-slim-menu-item--active {
+    box-shadow: 3px 0 0 0 $primary inset,0 -1px 0 0 transparent inset,0 1px 0 0 transparent inset;
+
+    > i:first-child {
+        color: $sidebar-menu-highlight-color;
+    }
+}
+@mixin sidebar-slim-menu-item--hover {
+    @include sidebar-slim-menu-item--active;
+}
+
+// Slim Submenus
+@mixin sidebar-slim-submenu-item {}             // Note: Keep as in Default
+@mixin sidebar-slim-submenu-item--active {      // Note: Keep as in Default
+    color: $white;
+    box-shadow: none;
+    
+    &::after {
+        color: $sidebar-menu-highlight-color;
+    }
+}
+@mixin sidebar-slim-submenu-item--hover {
+    @include sidebar-slim-submenu-item--active;
+}
+
+$sidebar-slim-submenu-bg: $black;
+$sidebar-slim-submenu-border-radius: 5px;
+$sidebar-slim-submenu-box-shadow: none;
+
+$sidebar-menu-item-padding: (
+    top: 0.5rem,
+    right: 1.5rem,
+    bottom: 0.5rem,
+    left: 1.5rem,
+);
+$sidebar-submenu-item-padding: (
+    top: 0.5rem,
+    right: 1.5rem,
+    bottom: 0.5rem,
+    left:  3.0rem,
+);
+$sidebar-slim-submenu-item-padding: (
+    top: 0.5rem,
+    right: 1rem,
+    bottom: 0.5rem,
+    left: 1.5rem,
+);
+$sidebar-submenu-nested-offset: 1rem;
+$sidebar-submenu-nested-font-size: 12px;
+
+// Navbars Styling
+// =============================================
+$navbar-height: 56px;
+$navbar-border-color: $gray-900;
+$navbar-background-color: $gray-900;
+
+/* Avatar Variants Definitions */
+$avatars: (
+    sm: (
+        size: 20px,
+
+        icon-bottom: 3px,
+        icon-right: 1px,
+        icon-font-size: 13px,
+        icon-stack-ratio: 0.75,
+        icon-stack-ratio-small: 0.44,
+        
+        badge-top: 1px,
+        badge-right: 1px,
+        badge-font-size: 9px
+    ),
+    md: (
+        size: 30px,
+        
+        icon-bottom: 5px,
+        icon-right: -1px,
+        icon-font-size: 20px,
+        icon-stack-ratio: 0.75,
+        icon-stack-ratio-small: 0.44,
+
+        badge-top: 3px,
+        badge-right: 5px
+    ),
+    lg: (
+        size: 60px,
+        
+        icon-bottom: 8px,
+        icon-right: 10px,
+        icon-font-size: 20px,
+        icon-stack-ratio: 0.75,
+        icon-stack-ratio-small: 0.44,
+        
+        badge-top: 5px,
+        badge-right: 10px
+    )
+);
+
+// All Colors Definitions (Add more colors in further parameters)
+$dashboard-colors: map-merge(
+    map-merge(
+        $grays,
+        $colors
+    ),
+    $theme-colors
+);
