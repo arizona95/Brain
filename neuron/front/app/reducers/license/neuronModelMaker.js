@@ -38,13 +38,7 @@ export default (state, action: Action) => {
     case MODEL_SAVEAS_FAIL :
       return state;
     case MODEL_SAVEAS_SUCCESS :
-      return {
-        ...state,
-        modelList:{
-          ...state.modelList,
-          ...action.payload.data,
-        }
-      };
+      return state;
     default:
       return state;
   }

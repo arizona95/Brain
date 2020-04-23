@@ -51,10 +51,6 @@ class AppLayout extends React.Component {
 
     return (
       <Layout favIcons={favIcons}>
-        {/* --------- Navbar ----------- */}
-        <Layout.Navbar>
-          {getNavbars(location.pathname)}
-        </Layout.Navbar>
 
         {/* -------- Content ------------*/}
         <Layout.Content>

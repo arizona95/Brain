@@ -14,8 +14,8 @@ import Home from './Home';
 const Wrapper = styled.div`
 .page {
   height: 100vh;
-  padding: 5rem 2rem 5%;
-  overflow-x: hidden;
+  padding: 1rem 2rem 5%;
+  overflow-x: none;
   position: fixed;
   top: 0;
   left: 0;

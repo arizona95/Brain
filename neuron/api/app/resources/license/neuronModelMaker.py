@@ -104,18 +104,16 @@ class ModelExportAPI(APIResource):
 
         graphNodes=[]
         graphEdges=[]
-
-        for key in config['nodes']: graphNodes.append(config['nodes'][key])
-        for key in config['edges']: graphEdges.append(config['edges'][key])
-
+        print(config)
         changedGraph= \
         {
             "graph": {
-                "nodes": graphNodes,
-                "edges": graphEdges,
+                "nodes": config['nodes'],
+                "edges": config['edges'],
             }
 
         }
+
 
         with open(config['modelInfo']['modelPath'], 'w') as modelJsonFile:
             json.dump(changedGraph, modelJsonFile)
