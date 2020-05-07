@@ -1,0 +1,92 @@
+<application>
+  <component name="ProjectJdkTable">
+    <jdk version="2">
+      <name value="Python 3.5 (untitled)" />
+      <type value="Python SDK" />
+      <version value="Python 3.5.6" />
+      <homePath value="C:\Users\arizona\Anaconda3\envs\tensorflow\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/DLLs" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/Lib" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/Lib/site-packages" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/Lib/site-packages/win32" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/Lib/site-packages/win32/lib" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/Lib/site-packages/pythonwin" type="simple" />
+            <root url="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/-786660044" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3.4" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/2and3" type="simple" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional ASSOCIATED_PROJECT_PATH="$USER_HOME$/PycharmProjects/untitled" />
+    </jdk>
+    <jdk version="2">
+      <name value="Python 3.5 (untitled) (1)" />
+      <type value="Python SDK" />
+      <homePath value="C:\Users\arizona\Anaconda3\envs\py32bit\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root url="file://$USER_HOME$/Anaconda3/envs/py32bit/DLLs" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/py32bit/Lib" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/py32bit" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/py32bit/Lib/site-packages" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/py32bit/Lib/site-packages/win32" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/py32bit/Lib/site-packages/win32/lib" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/py32bit/Lib/site-packages/pythonwin" type="simple" />
+            <root url="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/965172926" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3.4" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/2and3" type="simple" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional ASSOCIATED_PROJECT_PATH="$USER_HOME$/PycharmProjects/untitled" />
+    </jdk>
+    <jdk version="2">
+      <name value="Python 3.7 (Dowoome-develop)" />
+      <type value="Python SDK" />
+      <version value="Python 3.7.1" />
+      <homePath value="C:\Users\arizona\Desktop\add\Dowoome-develop\venv\Scripts\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/DLLs" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow/Lib" type="simple" />
+            <root url="file://$USER_HOME$/Anaconda3/envs/tensorflow" type="simple" />
+            <root url="file://$USER_HOME$/Desktop/add/Dowoome-develop/venv" type="simple" />
+            <root url="file://$USER_HOME$/Desktop/add/Dowoome-develop/venv/Lib/site-packages" type="simple" />
+            <root url="jar://$USER_HOME$/Desktop/add/Dowoome-develop/venv/Lib/site-packages/setuptools-40.8.0-py3.7.egg!/" type="simple" />
+            <root url="file://$USER_HOME$/Desktop/add/Dowoome-develop/venv/Lib/site-packages/pip-19.0.3-py3.7.egg" type="simple" />
+            <root url="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/1029765653" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/3" type="simple" />
+            <root url="file://$APPLICATION_HOME_DIR$/helpers/typeshed/third_party/2and3" type="simple" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional ASSOCIATED_PROJECT_PATH="$USER_HOME$/Desktop/add/Dowoome-develop" />
+    </jdk>
+  </component>
+</application>
