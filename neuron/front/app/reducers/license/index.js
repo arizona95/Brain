@@ -3,10 +3,13 @@ import _ from 'lodash';
 import type { Action, } from 'types/state';
 
 import{
-  neuronModelMakerActionTypes,
-  neuronModelListActionTypes,
   graphInitializeListActionTypes,
   graphInitializeMakerActionTypes,
+  neuronModelMakerActionTypes,
+  neuronModelListActionTypes,
+  neuronNetworkMakerActionTypes,
+  simulatorActionTypes,
+
 }from 'actions';
 
 const initialState = {
@@ -14,15 +17,40 @@ const initialState = {
   graph: { nodes:[], edges: [] },
 
   graphList: {},
+  networkList:{},
 }
 
 import neuronModelMakerReducer from './neuronModelMaker';
 import neuronModelListReducer from './neuronModelList';
 import graphInitializeListReducer from './graphInitializeList';
 import graphInitializeMakerReducer from './graphInitializeMaker';
+import neuronNetworkMakerReducer from './neuronNetworkMaker';
+import simulatorReducer from './simulator';
 
 export default (state = initialState, action: Action) => {
-  if (neuronModelMakerActionTypes.has(action.type)) {
+  if (graphInitializeListActionTypes.has(action.type)) {
+    console.log('raphInitializeList reducer');
+
+    let cloneState = _.cloneDeep(state);
+    const nextState =  graphInitializeListReducer(cloneState, action)
+
+    console.log(nextState)
+
+
+    return nextState;
+  }
+  else if (graphInitializeMakerActionTypes.has(action.type)) {
+    console.log('graphInitializeMaker reducer');
+
+    let cloneState = _.cloneDeep(state);
+    const nextState =  graphInitializeMakerReducer(cloneState, action)
+
+    console.log(nextState)
+
+
+    return nextState;
+  }
+  else if (neuronModelMakerActionTypes.has(action.type)) {
     console.log('neuronModelMaker reducer');
 
     let cloneState = _.cloneDeep(state);
@@ -44,22 +72,22 @@ export default (state = initialState, action: Action) => {
 
     return nextState;
   }
-  else if (graphInitializeListActionTypes.has(action.type)) {
-    console.log('raphInitializeList reducer');
+  else if (neuronNetworkMakerActionTypes.has(action.type)) {
+    console.log('neuronNetworkMakerActionTypes reducer');
 
     let cloneState = _.cloneDeep(state);
-    const nextState =  graphInitializeListReducer(cloneState, action)
+    const nextState =  neuronNetworkMakerReducer(cloneState, action)
 
     console.log(nextState)
 
 
     return nextState;
   }
-  else if (graphInitializeMakerActionTypes.has(action.type)) {
-    console.log('graphInitializeMaker reducer');
+  else if (simulatorActionTypes.has(action.type)) {
+    console.log('simulatorActionTypes reducer');
 
     let cloneState = _.cloneDeep(state);
-    const nextState =  graphInitializeMakerReducer(cloneState, action)
+    const nextState =  simulatorReducer(cloneState, action)
 
     console.log(nextState)
 

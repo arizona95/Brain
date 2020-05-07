@@ -13,7 +13,15 @@ import {
   graphSaveAs,
   graphFetch,
   graphAdd,
-  graphDelete,} from 'actions';
+  graphDelete,
+
+  networkFetch,
+  simulatorMaker,
+  simulatorManipulation,
+  simulatorClickInput,
+  simulatorDebugSetting,
+
+} from 'actions';
 
 import {
   Col,
@@ -40,6 +48,8 @@ import styled from 'styled-components';
 import {
   NeuronModelMaker,
   GraphInitializeMaker,
+  Simulator,
+  NeuronNetworkMaker,
 } from './component';
 
 
@@ -52,13 +62,16 @@ class Home extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      view: 'neuronModelMaker',
+      view: 'neuronNetworkMaker',
       neuronModelList:{},
       nowNeuronModelId:0,
       nowNeuronModelGraph: { nodes:[], edges: [] },
 
       graphInitializationList:{},
       nowGraphInitializationId:0,
+
+      neuronNetworkList:{},
+      nowNeronNetworkId:0,
 
     };
 
@@ -69,20 +82,30 @@ class Home extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
+
+   this.setState({
       ...this.state,
       neuronModelList: nextProps.data.modelList,
       nowNeuronModelGraph: nextProps.data.graph,
 
       graphInitializationList: nextProps.data.graphList,
-
+      neuronNetworkList: nextProps.data.networkList,
     })
   }
+
+
 
   setNowNeuronModelId = (id) => {
     this.setState({
       ...this.state,
       nowNeuronModelId: id,
+    })
+  }
+
+  setNowNeuronNetworkId = (id) => {
+    this.setState({
+      ...this.state,
+      nowNeuronNetworkId: id,
     })
   }
 
@@ -106,47 +129,101 @@ class Home extends React.Component {
       <div>
         <Row>
         <ButtonGroup>
+
           <Button
-            style={{'width':'25vw'}}
+            style={{'width':'13vw'}}
             color="secondary"
             className="text-white"
             outline
             active={this.state.view === 'graphInitializeMaker'}
-            onClick={() => this.setState({ view: 'graphInitializeMaker' })}
+            onClick={() => this.setState(
+              {
+                view: 'graphInitializeMaker',
+                nowGraphInitializationId:0,
+              })}
           >
             Graph Initialize Maker
           </Button>
           <Button
-            style={{'width':'25vw'}}
+            style={{'width':'13vw'}}
             color="secondary"
             className="text-white"
             outline
             active={this.state.view === 'neuronModelMaker'}
-            onClick={() => this.setState({ view: 'neuronModelMaker' })}
+            onClick={() => this.setState({
+              view: 'neuronModelMaker',
+              nowNeuronModelId:0,
+            })}
           >
             Neuron Model Maker
           </Button>
           <Button
-            style={{'width':'24vw'}}
+            style={{'width':'13vw'}}
             color="secondary"
             className="text-white"
             outline
             active={this.state.view === 'neuronNetworkMaker'}
-            onClick={() => this.setState({ view: 'neuronNetworkMaker' })}
+            onClick={() => this.setState({
+              view: 'neuronNetworkMaker'
+            })}
           >
             Neuron Network Maker
           </Button>
           <Button
-            style={{'width':'24vw'}}
+            style={{'width':'11vw'}}
             color="secondary"
             className="text-white"
             outline
             active={this.state.view === 'simulator'}
             onClick={() =>{
-              this.setState({ view: 'simulator' });}
+              this.setState({
+                view: 'simulator'
+              });}
             }
           >
             Simulator
+          </Button>
+          <Button
+            style={{'width':'12vw'}}
+            color="secondary"
+            className="text-white"
+            outline
+            active={this.state.view === 'simulator'}
+            onClick={() =>{
+              this.setState({
+                view: 'simulator'
+              });}
+            }
+          >
+            Object Maker
+          </Button>
+          <Button
+            style={{'width':'12vw'}}
+            color="secondary"
+            className="text-white"
+            outline
+            active={this.state.view === 'simulator'}
+            onClick={() =>{
+              this.setState({
+                view: 'simulator'
+              });}
+            }
+          >
+            Heredity simualtor
+          </Button>
+          <Button
+            style={{'width':'12vw'}}
+            color="secondary"
+            className="text-white"
+            outline
+            active={this.state.view === 'simulator'}
+            onClick={() =>{
+              this.setState({
+                view: 'simulator'
+              });}
+            }
+          >
+            Heredity space
           </Button>
 
         </ButtonGroup>
@@ -185,15 +262,40 @@ class Home extends React.Component {
                   nowNeuronModelId={this.state.nowNeuronModelId}
                   nowNeuronModelGraph={this.state.nowNeuronModelGraph}
 
+                  setNowGraphInitializationId={this.setNowGraphInitializationId}
+                  nowGraphInitializationId={this.state.nowGraphInitializationId}
+
                   graphFetch={this.props.graphFetch}
                   graphInitializationList={this.state.graphInitializationList}
                 />
               </CardBody>
             ): this.state.view === 'neuronNetworkMaker' ?(
               <CardBody style={{'width':'98vw', 'height':'94vh'}}>
+                <NeuronNetworkMaker
+                  networkFetch={this.props.networkFetch}
+                  neuronNetworkList={this.state.neuronNetworkList}
+
+                  setNowNeuronNetworkId={this.setNowNeuronNetworkId}
+                  nowNeuronNetworkId={this.state.nowNeuronNetworkId}
+                  />
               </CardBody>
             ): this.state.view === 'simulator' ?(
               <CardBody style={{'width':'98vw', 'height':'94vh'}}>
+                <Simulator
+                  networkFetch={this.props.networkFetch}
+                  simulatorMaker={this.props.simulatorMaker}
+                  simulatorManipulation={this.props.simulatorManipulation}
+                  simulatorClickInput={this.props.simulatorClickInput}
+                  simulatorDebugSetting={this.props.simulatorDebugSetting}
+
+                  neuronNetworkList={this.state.neuronNetworkList}
+
+                  setNowNeuronNetworkId={this.setNowNeuronNetworkId}
+                  nowNeuronNetworkId={this.state.nowNeuronNetworkId}
+
+
+
+                />
               </CardBody>
             ):(null)
           }
@@ -226,6 +328,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   graphFetch: (): Promise<Object> => dispatch(graphFetch()),
   graphAdd: (graphInfo): Promise<Object> => dispatch(graphAdd(graphInfo)),
   graphDelete: (graphInfo): Promise<Object> => dispatch(graphDelete(graphInfo)),
+
+  networkFetch: (): Promise<Object> => dispatch(networkFetch()),
+  simulatorMaker: (simulatorInfo): Promise<Object> => dispatch(simulatorMaker(simulatorInfo)),
+  simulatorManipulation: (manipulationInfo): Promise<Object> => dispatch(simulatorManipulation(manipulationInfo)),
+  simulatorClickInput: (clickInfo): Promise<Object> => dispatch(simulatorClickInput(clickInfo)),
+  simulatorDebugSetting: (debugInfo): Promise<Object> => dispatch(simulatorDebugSetting(debugInfo)),
 
 });
 

@@ -1,0 +1,14 @@
+{
+	"graph": 
+	{
+		"nodes": [
+			{"id":"Base1", "neuronId":"Base", "num":1, "link":"no-link"},
+			{"id":"input", "neuronId":"none", "num":1, "link":"no-link"},
+			{"id":"output", "neuronId":"none", "num":1, "link":"no-link"}
+		], 
+		"edges": [
+			{"id":1, "from":"input", "to":"Base1", "link":"one-to-one"},
+			{"id":1, "from":"Base1", "to":"input", "link":"one-to-one"},
+		],		
+	}
+}

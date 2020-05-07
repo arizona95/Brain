@@ -27,6 +27,7 @@ import React from 'react';
 import MathJax from 'react-mathjax2'
 import d3 from "d3";
 window.d3 = d3;
+const functionPlot = require("function-plot");
 
 class GraphInitializeMaker extends React.Component {
 
@@ -73,7 +74,7 @@ class GraphInitializeMaker extends React.Component {
       },
       wantToMakeGraph:"x",
       drawGraph:"",
-      parameterMaxABS:1.0,
+      parameterMaxABS:10.0,
       fetched:0,
 
     };
@@ -169,8 +170,6 @@ class GraphInitializeMaker extends React.Component {
     console.log('graph_props')
     console.log(this.props)
 
-
-    const functionPlot = require("function-plot");
     const root = document.querySelector("#functionPlot");
     var parameterGraph = ""
     _.map(this.state.parameter, (parameter, index)=>{

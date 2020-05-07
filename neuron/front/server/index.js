@@ -22,6 +22,7 @@ const app = express();
 const port = process.env.PORT || 4100;
 const rootDir = path.dirname(process.argv[1]);
 
+
 app.use(compression());
 
 app.use(async (req, res, next) => {

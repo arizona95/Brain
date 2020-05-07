@@ -9,20 +9,24 @@ from config import app_config
 from db.base import db_session
 from db.models import (
     Neuron,
-    Graph
+    Graph,
+    Network,
 )
 
 import json
 
 myPath = os.path.dirname(os.path.abspath(__file__))
-modelDBRootPath = os.path.join("\\".join(myPath.split('\\')[:-1]), "simulator\\modeldb")
+modelDBRootPath = os.path.join("\\".join(myPath.split('\\')[:-1]), "database\\modeldb")
 modelDBJsonList = os.listdir(modelDBRootPath)
-
-print(modelDBJsonList)
 
 for JsonName in modelDBJsonList :
 	Neuron.create(name=JsonName.split('.')[0],  modelPath= os.path.join(modelDBRootPath, JsonName) )
 
+modelDBRootPath = os.path.join("\\".join(myPath.split('\\')[:-1]), "database\\networkdb")
+modelDBJsonList = os.listdir(modelDBRootPath)
+
+for JsonName in modelDBJsonList :
+	Network.create(name=JsonName.split('.')[0],  modelPath= os.path.join(modelDBRootPath, JsonName) )
 
 initialGraphs = [
 	{
@@ -151,7 +155,6 @@ initialGraphs = [
 		}
 
 	},		
-
 
 ]
 

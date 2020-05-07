@@ -18,7 +18,7 @@ var config = {
   srcHtmlLayout: path.join(root, 'app', 'index.html'),
 
   // Site Config ====================================================
-  siteTitle: 'SPIN v2 (React)',
+  siteTitle: 'Brain',
   siteDescription: 'Dark Dashboard with latest React 16.x and Bootstrap 4.x',
   siteCannonicalUrl: 'http://localhost:4100',
   siteKeywords: 'react dashboard seed bootstrap',

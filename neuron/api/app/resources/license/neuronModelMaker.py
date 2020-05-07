@@ -55,7 +55,7 @@ class ModelSaveAsAPI(APIResource):
 
         newModelName = config['modelName']
         myPath = os.path.dirname(os.path.abspath(__file__))
-        modelDBRootPath = os.path.join("\\".join(myPath.split('\\')[:-5]), "simulator\\modeldb")
+        modelDBRootPath = os.path.join("\\".join(myPath.split('\\')[:-5]), "database\\modeldb")
         newModelPath = os.path.join(modelDBRootPath, newModelName + ".json")
 
         Neuron.create(name=newModelName, modelPath=newModelPath).commit()
