@@ -8,5 +8,5 @@ __all__ = ('Network',)
 
 class Network(Base, IdMixin, TimestampMixin):
     name = Column(Text, nullable=False)
-    modelPath = Column(Text, nullable=False)
+    networkPath = Column(Text, nullable=False)
 

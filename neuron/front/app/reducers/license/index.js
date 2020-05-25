@@ -3,43 +3,32 @@ import _ from 'lodash';
 import type { Action, } from 'types/state';
 
 import{
-  graphInitializeListActionTypes,
   graphInitializeMakerActionTypes,
   neuronModelMakerActionTypes,
-  neuronModelListActionTypes,
+  neuronGroupMakerActionTypes,
   neuronNetworkMakerActionTypes,
   simulatorActionTypes,
 
 }from 'actions';
 
 const initialState = {
-  modelList: {},
-  graph: { nodes:[], edges: [] },
-
   graphList: {},
+  modelList: {},
+  groupList:{},
   networkList:{},
-}
 
-import neuronModelMakerReducer from './neuronModelMaker';
-import neuronModelListReducer from './neuronModelList';
-import graphInitializeListReducer from './graphInitializeList';
+  modelGraph: { nodes:[], edges: [] },
+  groupGraph: { nodes:[], edges: [] },
+  networkGraph: { nodes:[], edges: [] },
+}
 import graphInitializeMakerReducer from './graphInitializeMaker';
+import neuronModelMakerReducer from './neuronModelMaker';
+import neuronGroupMakerReducer from './neuronGroupMaker';
 import neuronNetworkMakerReducer from './neuronNetworkMaker';
 import simulatorReducer from './simulator';
 
 export default (state = initialState, action: Action) => {
-  if (graphInitializeListActionTypes.has(action.type)) {
-    console.log('raphInitializeList reducer');
-
-    let cloneState = _.cloneDeep(state);
-    const nextState =  graphInitializeListReducer(cloneState, action)
-
-    console.log(nextState)
-
-
-    return nextState;
-  }
-  else if (graphInitializeMakerActionTypes.has(action.type)) {
+  if (graphInitializeMakerActionTypes.has(action.type)) {
     console.log('graphInitializeMaker reducer');
 
     let cloneState = _.cloneDeep(state);
@@ -61,11 +50,11 @@ export default (state = initialState, action: Action) => {
 
     return nextState;
   }
-  else if (neuronModelListActionTypes.has(action.type)) {
-    console.log('neuronModelList reducer');
+  else if (neuronGroupMakerActionTypes.has(action.type)) {
+    console.log('neuronGroupMakerActionTypes reducer');
 
     let cloneState = _.cloneDeep(state);
-    const nextState =  neuronModelListReducer(cloneState, action)
+    const nextState =  neuronGroupMakerReducer(cloneState, action)
 
     console.log(nextState)
 

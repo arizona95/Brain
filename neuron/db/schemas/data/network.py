@@ -7,5 +7,5 @@ __all__ = ('NetworkSchema', )
 class NetworkSchema(Schema):
     id = fields.Int()
     name = fields.Str()
-    modelPath = fields.Str()
+    networkPath = fields.Str()
     updated_at = fields.Int()

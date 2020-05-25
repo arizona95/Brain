@@ -125,7 +125,7 @@ class neuronModelMaker extends React.Component {
       Locality: 'Local',
       Role: 'Inner',
       shape: 'image',
-      image: 'http://localhost:3030/static/neuronType/Else.png',
+      image: 'http://localhost:3030/static/neuronElement/Else.png',
       group: 'Else',
       initial: 0.1,
       bound_max: 1,
@@ -155,11 +155,9 @@ class neuronModelMaker extends React.Component {
     console.log(newNodes);
 
     var newEdges = this.state.traceNetwork.edges;
-    graphData.edges.map(deleteEdge => {
-      newEdges = newEdges.filter(edge => edge.id != deleteEdge);
-    });
+    newEdges = newEdges.filter(edge => edge.from != graphData.nodes[0] && edge.to != graphData.nodes[0]);
 
-
+  
     this.setState({
       ...this.state,
       traceNetwork: {
@@ -177,6 +175,9 @@ class neuronModelMaker extends React.Component {
     console.log('addEdge!');
 
     console.log(edgeData);
+
+    // if edge exist, continue
+    if( this.state.traceNetwork.edges.filter(edge => edge.from == edgeData.from && edge.to == edgeData.to ).length !=0 ) return
 
     var date = new Date();
     var components = [
@@ -246,6 +247,31 @@ class neuronModelMaker extends React.Component {
       F_x: initialParameter,
     };
 
+    if( this.state.traceNetwork.edges.filter(edge => edge.from == edgeData.to && edge.to == edgeData.from ).length !=0 )
+    {
+      newEdgeData = {
+        ...newEdgeData,
+        smooth:{
+          'enabled':true,
+          'type':'curvedCW',
+          'roundness':0.1,
+        }
+      }
+
+      var mappingEdge = this.state.traceNetwork.edges.filter(edge => edge.from == edgeData.to && edge.to == edgeData.from )[0]
+      newEdges = newEdges.filter(edge => edge.from != edgeData.to || edge.to != edgeData.from )
+
+      mappingEdge = {
+        ...mappingEdge,
+        smooth:{
+          'enabled':true,
+          'type':'curvedCW',
+          'roundness':0.1,
+        }
+      }
+      newEdges.push(mappingEdge)
+    }
+
     newEdges.push(newEdgeData);
 
     this.setState({
@@ -256,7 +282,7 @@ class neuronModelMaker extends React.Component {
       },
     });
 
-    callback(edgeData);
+    callback(newEdgeData);
   };
 
   deleteEdgeCallBackFunc = (edgeData, callback) => {
@@ -372,46 +398,6 @@ class neuronModelMaker extends React.Component {
     });
   };
 
-  onChangeEdgeDescriptionByValue = (value) => {
-    var traceNetworkEdge = this.state.traceNetwork.edges.filter(edge => edge.id != this.state.selectEdgeId);
-
-    var newtraceNetworkEdge = {
-      ...this.state.traceNetwork.edges.filter(edge => edge.id == this.state.selectEdgeId)[0],
-      description: value,
-    };
-
-    traceNetworkEdge.push(newtraceNetworkEdge);
-
-    this.setState({
-      ...this.state,
-      traceNetwork: {
-        nodes: this.state.traceNetwork.nodes,
-        edges: traceNetworkEdge,
-      },
-    });
-
-  };
-
-  onChangeNodeDescriptionByValue = (value) => {
-    var traceNetworkNode = this.state.traceNetwork.nodes.filter(node => node.id != this.state.selectNodeId);
-
-    var newtraceNetworkNode = {
-      ...this.state.traceNetwork.nodes.filter(node => node.id == this.state.selectNodeId)[0],
-      description: value,
-    };
-
-    traceNetworkNode.push(newtraceNetworkNode);
-
-    this.setState({
-      ...this.state,
-      traceNetwork: {
-        nodes: traceNetworkNode,
-        edges: this.state.traceNetwork.edges,
-      },
-    });
-
-  };
-
   onClickEdgeParameterChange = (rdf) => {
     var traceNetworkEdge = this.state.traceNetwork.edges.filter(edge => edge.id != this.state.selectEdgeId);
 
@@ -473,7 +459,7 @@ class neuronModelMaker extends React.Component {
 
     console.log(this.props.graphInitializationList);
 
-    var DIR = 'http://localhost:3030/static/neuronType/';
+    var DIR = 'http://localhost:3030/static/neuronElement/';
 
     if (this.state.destroyNeed == true) {
       this.state.network.setData({ nodes: [], edges: [] });
@@ -777,7 +763,7 @@ class neuronModelMaker extends React.Component {
                       style={{ width: '47vw' }}
                       placeholder=""
                       value={selectedEdge.description}
-                      onChange={(e) => this.onChangeEdgeDescriptionByValue(e.target.value)}
+                      onChange={(e) => this.onClickEdgeParameterChange('description',e.target.value)}
                     >
                     </Input>
                   </div>)
@@ -788,7 +774,7 @@ class neuronModelMaker extends React.Component {
                       style={{ width: '47vw' }}
                       placeholder=""
                       value={selectedNode.description}
-                      onChange={(e) => this.onChangeNodeDescriptionByValue(e.target.value)}
+                      onChange={(e) => this.onChangeNodeParameterChange('description',e.target.value)}
                     >
                     </Input>
                   </div>)

@@ -2,20 +2,33 @@
 import {
   setPageLoading,
 
-  modelImport,
-  modelExport,
-  modelSaveAs,
-  modelFetch,
-  modelAdd,
-  modelDelete,
-
+  graphAdd,
+  graphDelete,
   graphExport,
   graphSaveAs,
   graphFetch,
-  graphAdd,
-  graphDelete,
+
+  modelFetch,
+  modelAdd,
+  modelDelete,
+  modelImport,
+  modelExport,
+  modelSaveAs,
+
+  groupFetch,
+  groupAdd,
+  groupDelete,
+  groupImport,
+  groupExport,
+  groupSaveAs,
 
   networkFetch,
+  networkAdd,
+  networkDelete,
+  networkImport,
+  networkExport,
+  networkSaveAs,
+
   simulatorMaker,
   simulatorManipulation,
   simulatorClickInput,
@@ -46,10 +59,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import styled from 'styled-components';
 import {
-  NeuronModelMaker,
   GraphInitializeMaker,
-  Simulator,
+  NeuronModelMaker,
+  NeuronGroupMaker,
   NeuronNetworkMaker,
+  Simulator,
 } from './component';
 
 
@@ -63,15 +77,21 @@ class Home extends React.Component {
     super(props);
     this.state = {
       view: 'neuronNetworkMaker',
-      neuronModelList:{},
-      nowNeuronModelId:0,
-      nowNeuronModelGraph: { nodes:[], edges: [] },
 
       graphInitializationList:{},
       nowGraphInitializationId:0,
 
+      neuronModelList:{},
+      nowNeuronModelId:0,
+      nowNeuronModelGraph: { nodes:[], edges: [] },
+
+      neuronGroupList:{},
+      nowNeronGroupId:0,
+      nowNeuronGroupGraph: { nodes:[], edges: [] },
+
       neuronNetworkList:{},
       nowNeronNetworkId:0,
+      nowNeuronNetworkGraph: { nodes:[], edges: [] },
 
     };
 
@@ -85,10 +105,14 @@ class Home extends React.Component {
 
    this.setState({
       ...this.state,
-      neuronModelList: nextProps.data.modelList,
-      nowNeuronModelGraph: nextProps.data.graph,
+
+      nowNeuronModelGraph: nextProps.data.modelGraph,
+      nowNeuronGroupGraph: nextProps.data.groupGraph,
+      nowNeuronNetworkGraph: nextProps.data.networkGraph,
 
       graphInitializationList: nextProps.data.graphList,
+      neuronModelList: nextProps.data.modelList,
+      neuronGroupList: nextProps.data.groupList,
       neuronNetworkList: nextProps.data.networkList,
     })
   }
@@ -101,6 +125,14 @@ class Home extends React.Component {
       nowNeuronModelId: id,
     })
   }
+
+  setNowNeuronGroupId = (id) => {
+    this.setState({
+      ...this.state,
+      nowNeuronGroupId: id,
+    })
+  }
+
 
   setNowNeuronNetworkId = (id) => {
     this.setState({
@@ -162,9 +194,23 @@ class Home extends React.Component {
             color="secondary"
             className="text-white"
             outline
+            active={this.state.view === 'neuronGroupMaker'}
+            onClick={() => this.setState({
+              view: 'neuronGroupMaker',
+              nowNeuronGroupId:0,
+            })}
+          >
+            Neuron Group Maker
+          </Button>
+          <Button
+            style={{'width':'13vw'}}
+            color="secondary"
+            className="text-white"
+            outline
             active={this.state.view === 'neuronNetworkMaker'}
             onClick={() => this.setState({
-              view: 'neuronNetworkMaker'
+              view: 'neuronNetworkMaker',
+              nowNeuronNetworkId:0,
             })}
           >
             Neuron Network Maker
@@ -257,7 +303,6 @@ class Home extends React.Component {
                   modelImport={this.props.modelImport}
 
                   setNowNeuronModelId={this.setNowNeuronModelId}
-
                   neuronModelList={this.state.neuronModelList}
                   nowNeuronModelId={this.state.nowNeuronModelId}
                   nowNeuronModelGraph={this.state.nowNeuronModelGraph}
@@ -269,14 +314,48 @@ class Home extends React.Component {
                   graphInitializationList={this.state.graphInitializationList}
                 />
               </CardBody>
+            ): this.state.view === 'neuronGroupMaker' ?(
+              <CardBody style={{'width':'98vw', 'height':'94vh'}}>
+                <NeuronGroupMaker
+                  groupFetch={this.props.groupFetch}
+                  groupAdd={this.props.groupAdd}
+                  groupSaveAs={this.props.groupSaveAs}
+                  groupExport={this.props.groupExport}
+                  groupDelete={this.props.groupDelete}
+                  groupImport={this.props.groupImport}
+
+                  setNowNeuronGroupId={this.setNowNeuronGroupId}
+                  neuronGroupList={this.state.neuronGroupList}
+                  nowNeuronGroupId={this.state.nowNeuronGroupId}
+                  nowNeuronGroupGraph={this.state.nowNeuronGroupGraph}
+
+                  modelFetch={this.props.modelFetch}
+                  nowNeuronModelId={this.state.nowNeuronModelId}
+                  setNowNeuronModelId={this.setNowNeuronModelId}
+                  neuronModelList={this.state.neuronModelList}
+                  />
+              </CardBody>
             ): this.state.view === 'neuronNetworkMaker' ?(
               <CardBody style={{'width':'98vw', 'height':'94vh'}}>
                 <NeuronNetworkMaker
                   networkFetch={this.props.networkFetch}
-                  neuronNetworkList={this.state.neuronNetworkList}
+                  networkAdd={this.props.networkAdd}
+                  networkSaveAs={this.props.networkSaveAs}
+                  networkExport={this.props.networkExport}
+                  networkDelete={this.props.networkDelete}
+                  networkImport={this.props.networkImport}
 
                   setNowNeuronNetworkId={this.setNowNeuronNetworkId}
+                  neuronNetworkList={this.state.neuronNetworkList}
                   nowNeuronNetworkId={this.state.nowNeuronNetworkId}
+                  nowNeuronNetworkGraph={this.state.nowNeuronNetworkGraph}
+
+                  groupFetch={this.props.groupFetch}
+                  nowNeuronGroupId={this.state.nowNeuronGroupId}
+                  setNowNeuronGroupId={this.setNowNeuronGroupId}
+                  neuronGroupList={this.state.neuronGroupList}
+
+
                   />
               </CardBody>
             ): this.state.view === 'simulator' ?(
@@ -313,23 +392,33 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setPageLoading: (loading: boolean) => dispatch(setPageLoading(loading)),
 
-
-  modelImport: (modelInfo): Promise<Object> => dispatch(modelImport(modelInfo)),
-  modelExport: (modelInfo): Promise<Object> => dispatch(modelExport(modelInfo)),
-  modelSaveAs: (modelInfo): Promise<Object> => dispatch(modelSaveAs(modelInfo)),
+  graphFetch: (): Promise<Object> => dispatch(graphFetch()),
+  graphAdd: (graphInfo): Promise<Object> => dispatch(graphAdd(graphInfo)),
+  graphDelete: (graphInfo): Promise<Object> => dispatch(graphDelete(graphInfo)),
+  graphExport: (graphInfo): Promise<Object> => dispatch(graphExport(graphInfo)),
+  graphSaveAs: (graphInfo): Promise<Object> => dispatch(graphSaveAs(graphInfo)),
 
   modelFetch: (): Promise<Object> => dispatch(modelFetch()),
   modelAdd: (modelInfo): Promise<Object> => dispatch(modelAdd(modelInfo)),
   modelDelete: (modelInfo): Promise<Object> => dispatch(modelDelete(modelInfo)),
+  modelImport: (modelInfo): Promise<Object> => dispatch(modelImport(modelInfo)),
+  modelExport: (modelInfo): Promise<Object> => dispatch(modelExport(modelInfo)),
+  modelSaveAs: (modelInfo): Promise<Object> => dispatch(modelSaveAs(modelInfo)),
 
-  graphExport: (graphInfo): Promise<Object> => dispatch(graphExport(graphInfo)),
-  graphSaveAs: (graphInfo): Promise<Object> => dispatch(graphSaveAs(graphInfo)),
-
-  graphFetch: (): Promise<Object> => dispatch(graphFetch()),
-  graphAdd: (graphInfo): Promise<Object> => dispatch(graphAdd(graphInfo)),
-  graphDelete: (graphInfo): Promise<Object> => dispatch(graphDelete(graphInfo)),
+  groupFetch: (): Promise<Object> => dispatch(groupFetch()),
+  groupAdd: (groupInfo): Promise<Object> => dispatch(groupAdd(groupInfo)),
+  groupDelete: (groupInfo): Promise<Object> => dispatch(groupDelete(groupInfo)),
+  groupImport: (groupInfo): Promise<Object> => dispatch(groupImport(groupInfo)),
+  groupExport: (groupInfo): Promise<Object> => dispatch(groupExport(groupInfo)),
+  groupSaveAs: (groupInfo): Promise<Object> => dispatch(groupSaveAs(groupInfo)),
 
   networkFetch: (): Promise<Object> => dispatch(networkFetch()),
+  networkAdd: (networkInfo): Promise<Object> => dispatch(networkAdd(networkInfo)),
+  networkDelete: (networkInfo): Promise<Object> => dispatch(networkDelete(networkInfo)),
+  networkImport: (networkInfo): Promise<Object> => dispatch(networkImport(networkInfo)),
+  networkExport: (networkInfo): Promise<Object> => dispatch(networkExport(networkInfo)),
+  networkSaveAs: (networkInfo): Promise<Object> => dispatch(networkSaveAs(networkInfo)),
+
   simulatorMaker: (simulatorInfo): Promise<Object> => dispatch(simulatorMaker(simulatorInfo)),
   simulatorManipulation: (manipulationInfo): Promise<Object> => dispatch(simulatorManipulation(manipulationInfo)),
   simulatorClickInput: (clickInfo): Promise<Object> => dispatch(simulatorClickInput(clickInfo)),

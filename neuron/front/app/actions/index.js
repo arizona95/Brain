@@ -1,18 +1,15 @@
 // @flow
 import * as commonAction from './common';
 import { setPageLoading } from './common';
-import { graphFetch, graphAdd, graphDelete } from './graphInitializeList' ;
-import * as graphInitializeListAction from './graphInitializeList';
-import { graphExport, graphSaveAs } from './graphInitializeMaker';
+import { graphFetch, graphAdd, graphDelete, graphExport, graphSaveAs } from './graphInitializeMaker';
 import * as graphInitializeMakerAction from './graphInitializeMaker';
-import { modelImport, modelExport, modelSaveAs } from './neuronModelMaker' ;
+import { modelFetch, modelAdd, modelDelete, modelImport, modelExport, modelSaveAs } from './neuronModelMaker' ;
 import * as neuronModelMakerAction from './neuronModelMaker';
-import { modelFetch, modelAdd, modelDelete } from './neuronModelList' ;
-import * as neuronModelListAction from './neuronModelList';
-import { networkFetch,} from './neuronNetworkMaker'
+import { groupFetch, groupAdd, groupDelete, groupImport, groupExport, groupSaveAs} from './neuronGroupMaker'
+import * as neuronGroupMakerAction from './neuronGroupMaker';
+import { networkFetch, networkAdd, networkDelete, networkImport, networkExport, networkSaveAs} from './neuronNetworkMaker'
 import * as neuronNetworkMakerAction from './neuronNetworkMaker';
-import { simulatorMaker, simulatorManipulation,
-  simulatorClickInput, simulatorDebugSetting,} from './simulator'
+import { simulatorMaker, simulatorManipulation, simulatorClickInput, simulatorDebugSetting,} from './simulator'
 import * as simulatorAction from './simulator';
 
 
@@ -49,32 +46,44 @@ const getActionTypesAsSet = (action): Set<string> => {
 };
 
 export const commonActionTypes = getActionTypesAsSet(commonAction);
-export const graphInitializeListActionTypes = getActionTypesAsSet(graphInitializeListAction);
 export const graphInitializeMakerActionTypes = getActionTypesAsSet(graphInitializeMakerAction);
-export const neuronModelListActionTypes = getActionTypesAsSet(neuronModelListAction);
 export const neuronModelMakerActionTypes = getActionTypesAsSet(neuronModelMakerAction);
+export const neuronGroupMakerActionTypes = getActionTypesAsSet(neuronGroupMakerAction);
 export const neuronNetworkMakerActionTypes = getActionTypesAsSet(neuronNetworkMakerAction);
 export const simulatorActionTypes = getActionTypesAsSet(simulatorAction);
 
 export {
   setPageLoading,
 
-  modelImport,
-  modelExport,
-  modelSaveAs,
+  graphFetch,
+  graphAdd,
+  graphDelete,
+  graphExport,
+  graphSaveAs,
 
   modelFetch,
   modelAdd,
   modelDelete,
+  modelImport,
+  modelExport,
+  modelSaveAs,
 
-  graphExport,
-  graphSaveAs,
+  groupFetch,
+  groupAdd,
+  groupDelete,
+  groupImport,
+  groupExport,
+  groupSaveAs,
 
-  graphFetch,
-  graphAdd,
-  graphDelete,
 
   networkFetch,
+  networkAdd,
+  networkDelete,
+  networkImport,
+  networkExport,
+  networkSaveAs,
+
+
   simulatorMaker,
   simulatorManipulation,
   simulatorClickInput,
