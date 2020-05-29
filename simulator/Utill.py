@@ -8,24 +8,11 @@ class Utill :
 	def __init__(self):
 
 		self.Args = Args()
-		self.cash_regist_list=["neuron_group", "neuron_model"]
-		self.cash= cash_regist()
+		self.cash_regist_list= self.Args.cash_regist_list
+		self.cash= self.cash_regist()
 		self.db_root_path = self.db_root_path_load()
-
-		self.db_name_filter_key = {
-			"networkdb":{
-				"nodes":["label","neuronGroup"],
-				"edges":[],
-			},
-			"groupdb":{
-				"nodes":["label", "Type", "Option", "neuron", "neuronNum", "outputNum"],
-				"edges":["Type","Option"],
-			},
-			"modeldb":{
-				"nodes":["label"],
-				"edges":[],
-			},
-		}
+		self.db_name_filter_key = self.Args.db_name_filter_key
+		self.RDF_function_list = dict()
 
 
 
@@ -39,6 +26,26 @@ class Utill :
 
 		return cash
 
+	def leaf_label(self,label) :
+		return label.split(self.Args.label_concat_letter)[-1]
+
+	def check_leaf_group_label_same(self, label_one, label_two):
+
+		#return leaf label is same
+		origin_label_one = label_one.split(self.Args.label_concat_letter)[-1].split(self.Args.group_label_numbering)[0]
+		origin_label_two = label_two.split(self.Args.label_concat_letter)[-1].split(self.Args.group_label_numbering)[0]
+		if origin_label_one == origin_label_two : return True
+		else : return False
+
+	def check_leaf_model_label_be_connect(self, from_output_label, to_input_label, locality):
+
+		#return leaf label is same
+		## @Output~Global~Spike -> @Input~Local~Spike
+		origin_from_output_label = from_output_label.split(self.Args.label_concat_letter)[-1].split(self.Args.locality_add_letter)[-1]
+		changed_from_output_label = self.Args.role_string["input"]+self.Args.locality_add_letter+locality+self.Args.locality_add_letter+origin_from_output_label
+		leaf_to_input_label = to_input_label.split(self.Args.label_concat_letter)[-1]
+		if changed_from_output_label == leaf_to_input_label : return True
+		else : return False
 
 	def db_root_path_load(self) :
 
@@ -61,10 +68,14 @@ class Utill :
 				return info
 
 		# if not in cash
-		file_path = os.path.join(self.db_root_path,  db_name, filename + 'json')
+		file_path = os.path.join(self.db_root_path,  db_name, filename + '.json')
 		with open(file_path,'r') as json_file :
 			dirty_info = json.load(json_file)["graph"]
 			info = self.make_clean_info(dirty_info, db_name)
+
+			if db_name == "neuron_model" :
+				# make R, D, F function
+				self.make_RDF_function_list(db_name, dirty_info["edges"])
 
 		#cash register
 		if db_name in self.cash_regist_list :
@@ -80,6 +91,18 @@ class Utill :
 
 		for dirty_node in dirty_info["nodes"]:
 
+			# save original label
+			dirty_node["original_label"] = dirty_node["label"]
+
+			# add locality node add letter
+			if db_name == "modeldb" :
+				if dirty_node["role"] != "@Inner" :
+						dirty_node["label"]= dirty_node["role"]+\
+											 self.Args.locality_add_letter+\
+											 dirty_node["locality"]+\
+											 self.Args.locality_add_letter+\
+											 dirty_node["label"]
+
 			# to search node label by id - for Edge information
 			id_to_label[dirty_node["id"]] = dirty_node["label"]
 
@@ -87,7 +110,11 @@ class Utill :
 			clean_node = dict()
 			if db_name in self.db_name_filter_key :
 				for filter_key in self.db_name_filter_key[db_name]["nodes"] :
-					clean_node[filter_key] = dirty_node[filter_key],
+					try:
+						clean_node[filter_key] = dirty_node[filter_key]
+					except:
+						print(dirty_node)
+						exit()
 
 			# add location
 			if "x" in dirty_node and "y" in dirty_node :
@@ -101,7 +128,7 @@ class Utill :
 			clean_edge= dict()
 			if db_name in self.db_name_filter_key :
 				for filter_key in self.db_name_filter_key[db_name]["edges"] :
-					clean_edge[filter_key] = dirty_edge[filter_key],
+					clean_edge[filter_key] = dirty_edge[filter_key]
 
 			# add from, to, label
 			if "from" in dirty_edge and "to" in dirty_edge:
@@ -113,4 +140,25 @@ class Utill :
 
 			clean_info["edges"].append(clean_edge)
 
+
 		return clean_info
+
+	def make_RDF_function_list(self, db_name, dirty_edges) :
+
+		self.RDF_function_list[db_name] = []
+
+
+	### 
+	"""
+
+	calculate_function
+
+	1: calculate by dictionary python
+	2: calculate by redis
+
+	"""
+	###
+	def calculate_function_method_1(self,db_name, edgeLabel, x):
+
+		dy = 0
+		return dy

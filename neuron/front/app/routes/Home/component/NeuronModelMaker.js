@@ -122,11 +122,12 @@ class neuronModelMaker extends React.Component {
     var newNodeData = {
       ...nodeData,
       description: 'new Node named [' + nodeName + ']',
-      Locality: 'Local',
-      Role: 'Inner',
+      locality: 'Local',
+      role: '@Inner',
       shape: 'image',
       image: 'http://localhost:3030/static/neuronElement/Else.png',
       group: 'Else',
+      function:'none',
       initial: 0.1,
       bound_max: 1,
       bound_min: 0,
@@ -834,14 +835,14 @@ class neuronModelMaker extends React.Component {
                     <td><h5>{'Locality'}</h5></td>
                     <td>
                       <Toggle
-                        checked={selectedNode.Locality == 'Global'}
-                        onChange={() => this.onChangeNodeParameterChange('Locality', 'Global')}
+                        checked={selectedNode.locality == 'Global'}
+                        onChange={() => this.onChangeNodeParameterChange('locality', 'Global')}
                       /><h6>{'Global'}</h6>
                     </td>
                     <td>
                       <Toggle
-                        checked={selectedNode.Locality == 'Local'}
-                        onChange={() => this.onChangeNodeParameterChange('Locality', 'Local')}
+                        checked={selectedNode.locality == 'Local'}
+                        onChange={() => this.onChangeNodeParameterChange('locality', 'Local')}
                       /><h6>{'Local'}</h6>
                     </td>
                   </tr>
@@ -849,26 +850,35 @@ class neuronModelMaker extends React.Component {
                     <td><h5>{'Role'}</h5></td>
                     <td>
                       <Toggle
-                        checked={selectedNode.Role == 'Input'}
-                        onChange={() => this.onChangeNodeParameterChange('Role', 'Input')}
+                        checked={selectedNode.role == '@Input'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Input')}
                       /><h6>{'Input'}</h6>
                     </td>
                     <td>
                       <Toggle
-                        checked={selectedNode.Role == 'Inner'}
-                        onChange={() => this.onChangeNodeParameterChange('Role', 'Inner')}
+                        checked={selectedNode.role == '@Inner'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Inner')}
                       /><h6>{'Inner'}</h6>
                     </td>
                     <td>
                       <Toggle
-                        checked={selectedNode.Role == 'Output'}
-                        onChange={() => this.onChangeNodeParameterChange('Role', 'Output')}
+                        checked={selectedNode.role == '@Output'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Output')}
                       /><h6>{'Output'}</h6>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><h5>{'Func'}</h5></td>
+                    <td>
+                      <Toggle
+                        checked={selectedNode.function == 'none'}
+                        onChange={() => this.onChangeNodeParameterChange('function', 'none')}
+                      /><h6>{'None'}</h6>
                     </td>
                     <td>
                       <Toggle
-                        checked={selectedNode.Role == 'Suicide'}
-                        onChange={() => this.onChangeNodeParameterChange('Role', 'Suicide')}
+                        checked={selectedNode.function == 'suicide'}
+                        onChange={() => this.onChangeNodeParameterChange('function', 'suicide')}
                       /><h6>{'Suicide'}</h6>
                     </td>
                   </tr>

@@ -148,17 +148,12 @@ class NetworkSaveAsAPI(APIResource):
         Network.create(name=newNetworkName, networkPath=newNetworkPath).commit()
 
 
-        graphNodes = []
-        graphEdges = []
-
-        for key in config['nodes']: graphNodes.append(config['nodes'][key])
-        for key in config['edges']: graphEdges.append(config['edges'][key])
 
         changedGraph = \
         {
             "graph": {
-                "nodes": graphNodes,
-                "edges": graphEdges,
+                "nodes": config['nodes'],
+                "edges": gconfig['edges'],
             }
 
         }

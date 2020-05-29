@@ -120,8 +120,8 @@ class NeuronGroupMaker extends React.Component {
       shape: 'image',
       image: 'http://localhost:3030/static/neuronModel/@Input@OutputNeuron.png',
       neuron: '',
-      visual: '@Input@Output',
-      locality:'local',
+      role: '@Input@Output',
+      locality:'Local',
     };
 
     newNodes.push(newNodeData);
@@ -195,7 +195,7 @@ class NeuronGroupMaker extends React.Component {
     var newEdgeData = {
       ...edgeData,
       description: 'new Edge : ' + fromStr + ' -> ' + toStr,
-      locality: 'local',
+      locality: 'Local',
     };
 
     if( this.state.traceNetwork.edges.filter(edge => edge.from == edgeData.to && edge.to == edgeData.from ).length !=0 )
@@ -379,7 +379,7 @@ class NeuronGroupMaker extends React.Component {
       [key]: value,
     };
 
-    if(key == 'visual'){
+    if(key == 'role'){
       var DIR = 'http://localhost:3030/static/neuronModel/';
       newtraceNetworkNode = {...newtraceNetworkNode, 'image': DIR + value+'Neuron.png'}
     }
@@ -652,43 +652,43 @@ class NeuronGroupMaker extends React.Component {
                     <td><h5>{'Visual'}</h5></td>
                     <td>
                       <Toggle
-                        checked={selectedNode.visual == '@Input'}
-                        onChange={() => this.onChangeNodeParameterChange('visual', '@Input')}
+                        checked={selectedNode.role == '@Input'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Input')}
                       /><h6>{'Input'}</h6>
                     </td>
                     <td>
                       <Toggle
-                        checked={selectedNode.visual == '@Inner'}
-                        onChange={() => this.onChangeNodeParameterChange('visual', '@Inner')}
+                        checked={selectedNode.role == '@Inner'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Inner')}
                       /><h6>{'Inner'}</h6>
                     </td></tr><tr><td/>
                     <td>
                       <Toggle
-                        checked={selectedNode.visual == '@Output'}
-                        onChange={() => this.onChangeNodeParameterChange('visual', '@Output')}
+                        checked={selectedNode.role == '@Output'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Output')}
                       /><h6>{'Output'}</h6>
                     </td>
                     <td>
                       <Toggle
-                        checked={selectedNode.visual == '@Input@Output'}
-                        onChange={() => this.onChangeNodeParameterChange('visual', '@Input@Output')}
+                        checked={selectedNode.role == '@Input@Output'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Input@Output')}
                       /><h6>{'Input&Output'}</h6>
                     </td>
                   </tr>
                   {
-                    selectedNode.visual == '@Output' || selectedNode.visual == '@Input@Output'?(
+                    selectedNode.role == '@Output' || selectedNode.role == '@Input@Output'?(
                       <tr>
                         <td><h5>{'Locality'}</h5></td>
                         <td>
                           <Toggle
-                            checked={selectedNode.locality == 'local'}
-                            onChange={() => this.onChangeNodeParameterChange('locality', 'local')}
+                            checked={selectedNode.locality == 'Local'}
+                            onChange={() => this.onChangeNodeParameterChange('locality', 'Local')}
                           /><h6>{'local'}</h6>
                         </td>
                         <td>
                           <Toggle
-                            checked={selectedNode.locality == 'global'}
-                            onChange={() => this.onChangeNodeParameterChange('locality', 'global')}
+                            checked={selectedNode.locality == 'Global'}
+                            onChange={() => this.onChangeNodeParameterChange('locality', 'Global')}
                           /><h6>{'global'}</h6>
                         </td>
                       </tr>
@@ -764,14 +764,14 @@ class NeuronGroupMaker extends React.Component {
                     <td><h5>{'Locality'}</h5></td>
                     <td>
                       <Toggle
-                        checked={selectedEdge.locality == 'local'}
-                        onChange={() => this.onClickEdgeParameterChange('locality', 'local')}
+                        checked={selectedEdge.locality == 'Local'}
+                        onChange={() => this.onClickEdgeParameterChange('locality', 'Local')}
                       /><h6>{'local'}</h6>
                     </td>
                     <td>
                       <Toggle
-                        checked={selectedEdge.locality == 'global'}
-                        onChange={() => this.onClickEdgeParameterChange('locality', 'global')}
+                        checked={selectedEdge.locality == 'Global'}
+                        onChange={() => this.onClickEdgeParameterChange('locality', 'Global')}
                       /><h6>{'global'}</h6>
                     </td>
                   </tr>

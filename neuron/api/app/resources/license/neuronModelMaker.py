@@ -162,8 +162,6 @@ class ModelSaveAsAPI(APIResource):
         }
 
 
-        print(newModelPath)
-
         with open(newModelPath, 'w') as modelJsonFile :
             json.dump(changedGraph, modelJsonFile)
 
