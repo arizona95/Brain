@@ -1,0 +1,9 @@
+node {
+  name: "a/c"
+  op: "matmul"
+}
+node {
+  name: "b"
+  op: "matmul"
+  input: "a/c"
+}

@@ -1,0 +1,13 @@
+node {
+  name: "cost/c"
+  op: "matmul"
+}
+node {
+  name: "cost/b"
+  op: "matmul"
+}
+node {
+  name: "b"
+  op: "matmul"
+  input: "cost/c"
+}
