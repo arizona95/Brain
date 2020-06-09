@@ -9,76 +9,17 @@ from db.models import (
 import werkzeug
 from flask import request
 import os
-import json
-from threading import Lock, Thread
-import time
 
-print('Simulator running!!!!!!')
+import sys
+myPath = os.path.dirname(os.path.abspath(__file__))
+simulatorPath = os.path.join("\\".join(myPath.split('\\')[:-5]), "simulator")
+sys.path.append(simulatorPath)
+from SimulatorManager import SimulatorManager
 
-
-class Simulator():
-
-    def __init__(self):
-        self.neuralNetwork = {}
-        self.inputTable = []
-        self.clickInput = None
-        self.simulatorThread = None
-        self.simulatorTime = 0
-        self.debugMode = False
-
-
-
-    def Work(self):
-        print('Work Start')
-
-        #setting
-
-        age=0
-        while True:
-
-            #break
-            if self.simulatorTime<=0 :
-                continue
-
-            #simualting
-            time.sleep(1)
-            age=age+1
-            self.simulatorTime = self.simulatorTime -1
-            print('age: '+str(age))
-
-    def run(self, networkInfo, inputTable, debugMode):
-        self.neuralNetwork = networkInfo
-        # temp
-        # input -> lif neuron
-
-        self.inputTable = inputTable
-        self.debugMode = debugMode
-
-        try :
-            self.simulatorThread.kill()
-            self.simulatorTime = 0
-            self.age = 0
-
-        except : print('there is no thread')
-
-        self.simulatorThread = Thread(target=self.Work)
-        self.simulatorThread.start()
-
-    def debugChange(self, debugMode):
-        self.debugMode = debugMode
-
-    def manipulateSimulatorRunning(self, simulatorTime) :
-        self.simulatorTime = simulatorTime
-
-    def clickInput(self, clickInput):
-        self.clickInput = clickInput
-
-
-
-simulatorObject = Simulator()
+simulatorManager = SimulatorManager()
 
 class SimulatorMakerAPI(APIResource):
-    global simulatorObject
+    global simulatorManager
 
     def post(self):
 
@@ -91,7 +32,9 @@ class SimulatorMakerAPI(APIResource):
         print(args)
 
 
-        simulatorObject.run(args.config["modelPath"], input, args.config["debug"])
+        simulatorManager.run(args.config["name"])
+
+        print("done")
 
 
         return '', status.HTTP_200_OK
@@ -106,7 +49,7 @@ api.add_resource(
 
 
 class SimulatorManipulationAPI(APIResource):
-    global simulatorObject
+    global simulatorManager
 
     def post(self):
 
@@ -119,20 +62,13 @@ class SimulatorManipulationAPI(APIResource):
         print(args)
 
         if args.config["manipulation"] == "run" :
-            simulatorObject.manipulateSimulatorRunning(100000000)
+            simulatorManager.manipulate_simulator_running(100000000)
         elif args.config["manipulation"] == "stop" :
-            simulatorObject.manipulateSimulatorRunning(0)
+            simulatorManager.manipulate_simulator_running(0)
         elif args.config["manipulation"] == "step" :
-            simulatorObject.manipulateSimulatorRunning(1)
+            simulatorManager.manipulate_simulator_running(1)
         elif args.config["manipulation"] == "forward":
-            simulatorObject.manipulateSimulatorRunning(int(args.config["forward"]))
-
-
-        #stopOrRun = args.config["stopOrRun"]
-        #simulatorTime = args.config["simulatorTime"]
-
-        #simulatorObject.manipulateSimulatorRunning(stopOrRun, simulatorTime)
-
+            simulatorManager.manipulate_simulator_running(int(args.config["forward"]))
 
         return '', status.HTTP_200_OK
 
@@ -144,7 +80,7 @@ api.add_resource(
 )
 
 class SimulatorClickInputAPI(APIResource):
-    global simulatorObject
+    global simulatorManager
 
     def post(self):
 
@@ -171,7 +107,7 @@ api.add_resource(
 
 
 class SimulatorDebugSettingAPI(APIResource):
-    global simulatorObject
+    global simulatorManager
 
     def post(self):
 
@@ -181,16 +117,24 @@ class SimulatorDebugSettingAPI(APIResource):
         parser.add_argument('config', type=dict, location='json', required=True)
         args = parser.parse_args()
 
-        print(args)
-
-
         #stopOrRun = args.config["stopOrRun"]
         #simulatorTime = args.config["simulatorTime"]
 
-        #simulatorObject.manipulateSimulatorRunning(stopOrRun, simulatorTime)
+        debug_config={}
+        if args.config["mode"] == "debug_include":
+            debug_config = {"debug_include":[args.config["data"]]}
+        elif args.config["mode"] == "debug_remove":
+            debug_config = {"debug_remove": [args.config["data"]]}
+        elif args.config["mode"] == "debug_mode_change":
+            if args.config["data"] == "False":
+                debug_config = {"debug_mode": "true"}
+            else :
+                debug_config = {"debug_mode": "false"}
 
+        simulatorManager.debug_set(debug_config)
 
-        return '', status.HTTP_200_OK
+        return simulatorManager.simulator.graph.debug_show, status.HTTP_200_OK
+
 
 
 api.add_resource(

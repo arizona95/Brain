@@ -9,6 +9,8 @@ from NeuronGroup import NeuronGroup
 from NeuronModel import NeuronModel
 from NeuronElement import NeuronElement
 
+from Timer import Timer
+
 class Simulator :
 
 	def __init__(self, neuron_network_filename):
@@ -38,6 +40,7 @@ class Simulator :
 
 
 	def one_step(self):
+
 		if self.graph.age %self.Args.neuron_update_cycle == 0 : 
 
 			###
@@ -51,7 +54,4 @@ class Simulator :
 			# 5. synaps split 			(neuron element)
 			###
 
-		self.neuron_group.step_neuron_network()
-
-			# 1. time invert neuron -1
-			# 2. for all edge, calculate 
+		self.neuron_element.one_step()										#  for all edge, calculate 

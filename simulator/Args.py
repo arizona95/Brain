@@ -12,7 +12,7 @@ class Args:
 		self.neuron_update_cycle = 1000
 
 
-		self.layer_throw_concat_letter = "@"
+		self.layer_throw_concat_letter = "||"
 		self.group_label_numbering="#"
 		self.group_init_letter="G"
 		self.locality_add_letter = "~"
@@ -60,15 +60,13 @@ class Args:
 			},
 		}
 
-		self.neuron_max_synaps_num = 100
+		self.neuron_max_synaps_num = 8
 		self.neuron_min_synaps_time_interval = 2
 		self.neuron_max_synaps_time_interval = 20
 		self.neuron_global_synaps_time_interval = 5
 		self.time_interval_cycle_queue_size = self.calculate_cycle_queue_size()
 		self.time_interval_cycle_queue_moduler = self.time_interval_cycle_queue_size -1
-		self.init_queue = np.array([0 for col in range(self.time_interval_cycle_queue_size)])
-
-
+		self.init_queue = np.array([[0 for col in range(self.time_interval_cycle_queue_size)]])
 
 
 

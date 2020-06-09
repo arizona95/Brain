@@ -2,7 +2,6 @@ import json
 import os
 from Args import Args
 
-
 class Utill :
 
 	def __init__(self):
@@ -12,7 +11,7 @@ class Utill :
 		self.cash= self.cash_regist()
 		self.db_root_path = self.db_root_path_load()
 		self.db_name_filter_key = self.Args.db_name_filter_key
-		self.RDF_function_list = dict()
+		self.RDF_function = dict()
 
 
 
@@ -73,9 +72,8 @@ class Utill :
 			dirty_info = json.load(json_file)["graph"]
 			info = self.make_clean_info(dirty_info, db_name)
 
-			if db_name == "neuron_model" :
-				# make R, D, F function
-				self.make_RDF_function_list(db_name, dirty_info["edges"])
+			if db_name == "modeldb" :
+				self.make_RDF_function(filename, db_name, dirty_info)
 
 		#cash register
 		if db_name in self.cash_regist_list :
@@ -96,7 +94,7 @@ class Utill :
 
 			# add locality node add letter
 			if db_name == "modeldb" :
-				if dirty_node["role"] != "@Inner" :
+				if dirty_node["role"] != self.Args.role_string["inner"] :
 						dirty_node["label"]= dirty_node["role"]+\
 											 self.Args.locality_add_letter+\
 											 dirty_node["locality"]+\
@@ -143,22 +141,43 @@ class Utill :
 
 		return clean_info
 
-	def make_RDF_function_list(self, db_name, dirty_edges) :
+	def RDF_dict_to_list(self, RDF_dict):
 
-		self.RDF_function_list[db_name] = []
+		RDF_list = []
+		for rdf_key in RDF_dict :
+			RDF_list.append(RDF_dict[rdf_key]["value"])
+
+		return RDF_list
 
 
-	### 
-	"""
+	def make_RDF_function(self, filename, db_name, dirty_info) :
 
-	calculate_function
+		self.RDF_function[filename] = dict()
 
-	1: calculate by dictionary python
-	2: calculate by redis
+		id_to_label = dict()
 
-	"""
-	###
-	def calculate_function_method_1(self,db_name, edgeLabel, x):
+		for dirty_node in dirty_info["nodes"]:
+			# to search node label by id - for Edge information
+			id_to_label[dirty_node["id"]] = dirty_node["label"]
 
-		dy = 0
-		return dy
+		for dirty_edge in dirty_info["edges"]:
+			if "from" in dirty_edge and "to" in dirty_edge:
+				from_label = id_to_label[dirty_edge["from"]]
+				to_label = id_to_label[dirty_edge["to"]]
+				edge_label =  from_label + self.Args.label_maker_str + to_label
+				self.RDF_function[filename] [edge_label] = {
+					"R_x": self.RDF_dict_to_list(dirty_edge["R_x"]),
+					"D_x": self.RDF_dict_to_list(dirty_edge["D_x"]),
+					"F_x": self.RDF_dict_to_list(dirty_edge["F_x"]),
+				}
+
+	def make_list_to_line_chart_data(self, chart_list_data):
+		chart_data = []
+
+		for index, data in enumerate(chart_list_data) :
+			chart_data.append({
+				"name": str(index),
+				"value": data*10000,
+			})
+		return chart_data
+

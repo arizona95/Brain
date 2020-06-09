@@ -54,8 +54,12 @@ export default (state, action: Action) => {
       return state;
     case SIMULATOR_DEBUG_FAIL :
       return state;
-    case SIMULATOR_DEBUG_SUCCESS:
-      return state;
+    case SIMULATOR_DEBUG_SUCCESS: {
+      return {
+        ...state,
+        debugShow : action.payload.data,
+      };
+    }
     default:
       return state;
   }

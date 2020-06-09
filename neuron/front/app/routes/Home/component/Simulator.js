@@ -36,6 +36,7 @@ class Simulator extends React.Component {
     this.state = {
       forward:1,
       debug:true,
+      debugShow:{},
     }
   }
 
@@ -45,7 +46,11 @@ class Simulator extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-      console.log("componentWillReceiveProps")
+    console.log("componentWillReceiveProps")
+    this.setState({
+      ...this.state,
+      debugShow:nextProps.debugShow,
+    })
 
   }
 
@@ -61,6 +66,68 @@ class Simulator extends React.Component {
       ...this.state,
       debug: this.state.debug==true? false:true,
     })
+  }
+
+  onChangeFold = (depth,label_list)=>{
+    var changedDebugShow = this.state.debugShow
+
+    if(depth ==0)
+    {
+      changedDebugShow = {
+        ...changedDebugShow,
+        [label_list[0]]:{
+          ...changedDebugShow[label_list[0]],
+          fold : changedDebugShow[label_list[0]].fold==0?1 :0,
+        }
+      }
+    }
+    else if(depth ==1)
+    {
+      var neuron_group_data = changedDebugShow[label_list[0]].data
+      changedDebugShow = {
+        ...changedDebugShow,
+        [label_list[0]]:{
+          ...changedDebugShow[label_list[0]],
+          data: {
+            ...neuron_group_data,
+            [label_list[1]]: {
+              ...neuron_group_data[label_list[1]],
+              fold: neuron_group_data[label_list[1]].fold == 0 ? 1 : 0,
+            }
+          }
+        }
+      }
+    }
+    else if(depth ==2)
+    {
+      var neuron_group_data = changedDebugShow[label_list[0]].data
+      var neuron_model_data = neuron_group_data[label_list[1]].data
+      changedDebugShow = {
+        ...changedDebugShow,
+        [label_list[0]]:{
+          ...changedDebugShow[label_list[0]],
+          data: {
+            ...neuron_group_data,
+            [label_list[1]]: {
+              ...neuron_group_data[label_list[1]],
+              data:{
+                ...neuron_model_data,
+                [label_list[2]]:{
+                  ...neuron_model_data[label_list[2]],
+                  fold: neuron_model_data[label_list[2]].fold == 0 ? 1:0,
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    this.setState({
+      ...this.state,
+      debugShow : changedDebugShow
+    })
+
   }
 
 
@@ -163,7 +230,10 @@ class Simulator extends React.Component {
               <Col xs={1} sm={1} md={1}/>
               <Toggle
                   checked={this.state.debug}
-                  onChange={() => this.props.simulatorDebugSetting({debug:this.state.debug}).then(()=>this.onChangeDebug())}
+                  onChange={() => this.props.simulatorDebugSetting({
+                    mode:"debug_mode_change",
+                    data:this.state.debug,
+                  }).then(()=>this.onChangeDebug())}
                />
             </Row>
             <Row>
@@ -221,29 +291,235 @@ class Simulator extends React.Component {
             }
           </ListGroup>
         </Col>
-          <Col xs={10} sm={10} md={8} style = {{"padding": "0px"}}>
-            <iframe key={1} src="http://localhost:8001/demo/index.html" width="1600vw" height="1180vh"/>
+          <Col xs={10} sm={10} md={7} style = {{"padding": "0px"}}>
+            <iframe key={1} src={"http://localhost:8001/demo/index.html?"+this.props.refreshTensorboard} width="1100vw" height="1180vh"/>
           </Col>
-          <Col xs={2} sm={2} md={2} style = {{"padding": "0px"}}>
-            <ListGroup style = {{ width :"15vw"}}>
+          <Col xs={2} sm={2} md={3} style={{ "padding": "0px" }}>
+          <td onClick={() => window.open("Debug", "_blank")}>Debug</td>
+          {
+            _.map(this.state.debugShow, (neuron_network_label, index)=>(
+              <div>
               <Row>
-                <ListGroupItem
-                      style={{ "backgroundColor": "#16E7E5", margin: "2px", width: "13vw" }}
+                {
+                  neuron_network_label.fold == 0?(
+                  <Button
+                    style={{ 'width': '2vw', "backgroundColor": "#111111", "borderColor": "#111111" }}
+                    className="text-white"
+                    outline
+                    onClick={() => {
+                      this.onChangeFold(0,[neuron_network_label.label])
+                    }}
+                  ><i className="fa fa-minus"/>
+                  </Button>) :(
+                  <Button
+                    style={{ 'width': '2vw', "backgroundColor": "#111111", "borderColor": "#111111" }}
+                    className="text-white"
+                    outline
+                    onClick={() => {
+                      this.onChangeFold(0,[neuron_network_label.label])
+                    }}
+                  ><i className="fa fa-plus"/>
+                  </Button>
+                  )
+                }
+                <ListGroup style={{ width: "13vw" }}>
+                    <ListGroupItem
+                      style={{ "backgroundColor": "#ffb6c1", margin: "0px", width: "13vw" }}
                       tag="button"
                       onClick={() => {
                         console.log('haha')
                       }}
                       action href="#">
-                    <span className="ml-1 text-inverse"
-                          ref={(el) => {
-                            if (el) {
-                              el.style.setProperty('color', '#000000', 'important');
-                            }
-                          }}>
-                      aaa</span>
+                      <span className="ml-1 text-inverse"
+                            ref={(el) => {
+                              if (el) {
+                                el.style.setProperty('color', '#000000', 'important');
+                              }
+                            }}>
+                        {neuron_network_label.label}</span>
                     </ListGroupItem>
+                </ListGroup>
+                <Button
+                  style={{'width':'2vw', "backgroundColor": "#66484d",}}
+                  className="text-white"
+                  outline
+                  onClick={() => {
+                    this.props.simulatorDebugSetting({
+                      mode: "debug_remove",
+                      data: neuron_network_label.label,
+                    })
+                  }}
+                ><i className="fa fa-close (alias)"/>
+                </Button>
               </Row>
-            </ListGroup>
+                {
+                  neuron_network_label.fold == 0 ?(
+                  _.map(neuron_network_label.data, (neuron_group_label, index)=>(
+                    <div>
+                        <Row>
+                          <Col xs={2} sm={2} md={1}/>
+                            {
+                              neuron_group_label.fold == 0?(
+                              <Button
+                                style={{ 'width': '2vw', "backgroundColor": "#111111", "borderColor": "#111111" }}
+                                className="text-white"
+                                outline
+                                onClick={() => {
+                                  this.onChangeFold(1,[neuron_network_label.label,neuron_group_label.label])
+                                }}
+                              ><i className="fa fa-minus"/>
+                              </Button>) :(
+                              <Button
+                                style={{ 'width': '2vw', "backgroundColor": "#111111", "borderColor": "#111111" }}
+                                className="text-white"
+                                outline
+                                onClick={() => {
+                                  this.onChangeFold(1,[neuron_network_label.label,neuron_group_label.label])
+                                }}
+                              ><i className="fa fa-plus"/>
+                              </Button>
+                              )
+                            }
+                            <ListGroup style={{ width: "13vw" }}>
+                              <ListGroupItem
+                                style={{ "backgroundColor": "#a1ffc8", margin: "0px", width: "13vw" }}
+                                tag="button"
+                                onClick={() => {
+                                  console.log('haha')
+                                }}
+                                action href="#">
+                                <span className="ml-1 text-inverse"
+                                      ref={(el) => {
+                                        if (el) {
+                                          el.style.setProperty('color', '#000000', 'important');
+                                        }
+                                      }}>
+                                  {neuron_group_label.label}</span>
+                              </ListGroupItem>
+                            </ListGroup>
+                            <Button
+                              style={{'width':'2vw', "backgroundColor": "#285244",}}
+                              className="text-white"
+                              outline
+                              onClick={() => {
+                                this.props.simulatorDebugSetting({
+                                  mode: "debug_remove",
+                                  data: neuron_group_label.label,
+                                })
+                              }}
+                            ><i className="fa fa-close (alias)"/>
+                            </Button>
+                        </Row>
+                      {
+                        neuron_group_label.fold == 0? (
+                        _.map(neuron_group_label.data, (neuron_model_label, index)=>(
+                        <div>
+                          <Row>
+                          <Col xs={2} sm={2} md={2}/>
+                            {
+                              neuron_model_label.fold == 0?(
+                              <Button
+                                style={{ 'width': '2vw', "backgroundColor": "#111111", "borderColor": "#111111" }}
+                                className="text-white"
+                                outline
+                                onClick={() => {
+                                  this.onChangeFold(2,[neuron_network_label.label,neuron_group_label.label,neuron_model_label.label])
+                                }}
+                              ><i className="fa fa-minus"/>
+                              </Button>) :(
+                              <Button
+                                style={{ 'width': '2vw', "backgroundColor": "#111111", "borderColor": "#111111" }}
+                                className="text-white"
+                                outline
+                                onClick={() => {
+                                  this.onChangeFold(2,[neuron_network_label.label,neuron_group_label.label,neuron_model_label.label])
+                                }}
+                              ><i className="fa fa-plus"/>
+                              </Button>
+                              )
+                            }
+                            <ListGroup style={{ width: "13vw" }}>
+                              <ListGroupItem
+                                style={{ "backgroundColor": "#16E7E5", margin: "0px", width: "13vw" }}
+                                tag="button"
+                                onClick={() => {
+                                  console.log('haha')
+                                }}
+                                action href="#">
+                                <span className="ml-1 text-inverse"
+                                      ref={(el) => {
+                                        if (el) {
+                                          el.style.setProperty('color', '#000000', 'important');
+                                        }
+                                      }}>
+                                  {neuron_model_label.label}</span>
+                              </ListGroupItem>
+                            </ListGroup>
+                            <Button
+                              style={{'width':'2vw', "backgroundColor": "#354D4D",}}
+                              className="text-white"
+                              outline
+                              onClick={() => {
+                                this.props.simulatorDebugSetting({
+                                  mode: "debug_remove",
+                                  data: neuron_model_label.label,
+                                })
+                              }}
+                            ><i className="fa fa-close (alias)"/>
+                            </Button>
+                          </Row>
+                          {
+                            neuron_model_label.fold == 0? (
+                            _.map(neuron_model_label.data, (neuron_element_label, index)=>(
+                            <div>
+                              <Row>
+                              <Col xs={2} sm={2} md={4}/>
+                                <ListGroup style={{ width: "13vw" }}>
+                                  <ListGroupItem
+                                    style={{ "backgroundColor": "#bbbbbb", margin: "0px", width: "13vw" }}
+                                    tag="button"
+                                    onClick={() => {
+                                      console.log('haha')
+                                    }}
+                                    action href="#">
+                                    <span className="ml-1 text-inverse"
+                                          ref={(el) => {
+                                            if (el) {
+                                              el.style.setProperty('color', '#000000', 'important');
+                                            }
+                                          }}>
+                                      {neuron_element_label.label}</span>
+                                  </ListGroupItem>
+                                </ListGroup>
+                                <Button
+                                  style={{'width':'2vw', "backgroundColor": "#222222",}}
+                                  className="text-white"
+                                  outline
+                                  onClick={() => {
+                                    this.props.simulatorDebugSetting({
+                                      mode: "debug_remove",
+                                      data: neuron_element_label.label,
+                                    })
+                                  }}
+                                ><i className="fa fa-close (alias)"/>
+                                </Button>
+                              </Row>
+                            </div>
+                            ))
+                            ):(<div/>)
+                          }
+                        </div>
+                        ))
+                        ):(<div/>)
+
+                      }
+                    </div>
+                  ))
+                  ):(<div/>)
+                }
+              </div>
+            ) )
+          }
           </Col>
         </Row>
       </div>

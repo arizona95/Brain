@@ -10,6 +10,7 @@ import { MainNavbar } from '../layout/components/MainNavbar';
 
 
 import Home from './Home';
+import Debug from './Debug';
 
 const Wrapper = styled.div`
 .page {
@@ -122,6 +123,7 @@ const getRoutes = (props) => {
               <Route location={location}>
                 <Switch>
                   <Route exact path="/" component={Home}/>
+                  <Route exact path="/Debug" component={Debug}/>
                 </Switch>
               </Route>
             </section>

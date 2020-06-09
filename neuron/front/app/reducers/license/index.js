@@ -20,6 +20,8 @@ const initialState = {
   modelGraph: { nodes:[], edges: [] },
   groupGraph: { nodes:[], edges: [] },
   networkGraph: { nodes:[], edges: [] },
+
+  debugShow: {},
 }
 import graphInitializeMakerReducer from './graphInitializeMaker';
 import neuronModelMakerReducer from './neuronModelMaker';

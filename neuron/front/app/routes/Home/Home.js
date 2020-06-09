@@ -65,11 +65,8 @@ import {
   NeuronNetworkMaker,
   Simulator,
 } from './component';
-
-
-import Graph from "react-graph-vis";
-import MathJax from 'react-mathjax2'
-
+import socketio from 'socket.io-client';
+const socket = socketio.connect('http://localhost:3030')
 
 class Home extends React.Component {
 
@@ -77,6 +74,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       view: 'simulator',
+      refreshTensorboard:0,
 
       graphInitializationList:{},
       nowGraphInitializationId:0,
@@ -93,12 +91,20 @@ class Home extends React.Component {
       nowNeronNetworkId:0,
       nowNeuronNetworkGraph: { nodes:[], edges: [] },
 
+      debugInfo: {},
     };
 
   }
 
   componentDidMount() {
     this.props.setPageLoading(false);
+    socket.on('debug_include',(node_name)=>{
+      this.props.simulatorDebugSetting({
+        mode:"debug_include",
+        data:node_name,
+      })
+
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -138,6 +144,7 @@ class Home extends React.Component {
     this.setState({
       ...this.state,
       nowNeuronNetworkId: id,
+      refreshTensorboard: this.state.refreshTensorboard+1,
     })
   }
 
@@ -371,6 +378,10 @@ class Home extends React.Component {
 
                   setNowNeuronNetworkId={this.setNowNeuronNetworkId}
                   nowNeuronNetworkId={this.state.nowNeuronNetworkId}
+
+                  refreshTensorboard={this.state.refreshTensorboard}
+                  debugShow={this.props.data.debugShow}
+
 
 
 
