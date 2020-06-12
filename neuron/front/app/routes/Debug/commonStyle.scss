@@ -1,0 +1,19 @@
+
+
+.cardBody {
+  height: 97vh;
+  width: 98vw;
+  overflow: scroll;
+}
+
+
+::-webkit-scrollbar{
+  -webkit-appearance: none;
+  width:12px;
+  display:block !important;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius:4px;
+  background-color:rgba(144,144,144, .5)
+}
