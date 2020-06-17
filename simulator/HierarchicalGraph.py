@@ -331,7 +331,7 @@ class HierarchicalGraph :
 							self.debug_show[neuron_network_label]["data"][neuron_group_label] = {"label": neuron_group_label , "data":dict(), "fold":0}
 						for neuron_model_label in self.hierarchical_down_group_dict[neuron_group_label]:
 							if neuron_model_label not in self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"] :
-								self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":1}
+								self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":0}
 							if neuron_model_label not in self.debug_dict :
 								add_debug_list.append(neuron_model_label)
 							for neuron_element_label in self.hierarchical_down_group_dict[neuron_model_label]:
@@ -349,7 +349,7 @@ class HierarchicalGraph :
 
 					for neuron_model_label in self.hierarchical_down_group_dict[neuron_group_label]:
 						if neuron_model_label not in self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"] :
-							self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":1}
+							self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":0}
 						if neuron_model_label not in self.debug_dict :
 							add_debug_list.append(neuron_model_label)
 						for neuron_element_label in self.hierarchical_down_group_dict[neuron_model_label]:
@@ -367,7 +367,7 @@ class HierarchicalGraph :
 					if neuron_group_label not in self.debug_show[neuron_network_label]["data"] :
 						self.debug_show[neuron_network_label]["data"][neuron_group_label] = {"label": neuron_group_label , "data":dict(), "fold":0}
 					if neuron_model_label not in self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"] :
-						self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":1}
+						self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":0}
 
 					if neuron_model_label not in self.debug_dict :
 						add_debug_list.append(neuron_model_label)
@@ -386,7 +386,7 @@ class HierarchicalGraph :
 					if neuron_group_label not in self.debug_show[neuron_network_label]["data"] :
 						self.debug_show[neuron_network_label]["data"][neuron_group_label] = {"label": neuron_group_label , "data":dict(), "fold":0}
 					if neuron_model_label not in self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"] :
-						self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":1}
+						self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label] = {"label": neuron_model_label , "data":dict(), "fold":0}
 					if neuron_element_label not in self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label]["data"]:
 						self.debug_show[neuron_network_label]["data"][neuron_group_label]["data"][neuron_model_label]["data"][neuron_element_label] = {"label": neuron_element_label , "data":dict()}
 

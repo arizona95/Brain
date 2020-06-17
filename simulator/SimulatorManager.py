@@ -22,7 +22,7 @@ class SimulatorManager():
                 continue
 
             #simualting
-            time.sleep(0.1)
+            #time.sleep(0.1)
 
             self.simulator.one_step()
 
