@@ -40,8 +40,8 @@ import _ from "lodash";
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import socketio from 'socket.io-client';
-const socket = socketio.connect('http://localhost:3030')
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:3030' )
 import styles from "./commonStyle.scss"
 
 class Debug extends React.Component {
@@ -58,6 +58,7 @@ class Debug extends React.Component {
   componentDidMount() {
     this.props.setPageLoading(false);
     socket.on('debug_info',(debug_info)=>{
+      console.log(debug_info)
       this.setState({
         ...this.state,
         debugInfo: debug_info["debug_info"],

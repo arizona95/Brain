@@ -41,4 +41,6 @@ def run_flask():
 	t.start()
 
 run_flask()
+
+print("haha")
 socketio.run(app, host='127.0.0.1', port = 3030)

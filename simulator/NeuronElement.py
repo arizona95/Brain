@@ -167,6 +167,13 @@ class NeuronElement :
 								for synaps_index, synaps_label in enumerate(self.graph.node_label_dict[neuron_model_label]["local_synaps"]) :
 									neuron_element_info[synaps_label] = {"label": synaps_label, "data": self.Utill.make_list_to_line_chart_data(value_history[synaps_index])}
 
+			debug_info = {
+				'debug_info' : debug_info,
+				'else_info' : {
+					'age': self.graph.age,
+				}
+			}
+
 			self.socketIO.emit('debug_info',debug_info)
 
 

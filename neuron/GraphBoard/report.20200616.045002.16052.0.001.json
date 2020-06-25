@@ -1,0 +1,285 @@
+
+{
+  "header": {
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200616.045002.16052.0.001.json",
+    "dumpEventTime": "2020-06-16T04:50:02Z",
+    "processId": 16052,
+    "cwd": "C:\\Users\\arizona\\Desktop\\Brain\\Brain\\Brain\\neuron\\GraphBoard",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\\\node.exe",
+      "C:\\Program Files\\nodejs\\\\node_modules\\gulp\\bin\\gulp.js"
+    ],
+    "nodejsVersion": "v11.15.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "11.15.0",
+      "v8": "7.0.276.38-node.19",
+      "uv": "1.27.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "67",
+      "nghttp2": "1.37.0",
+      "napi": "4",
+      "llhttp": "1.1.1",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1b",
+      "cldr": "34.0",
+      "icu": "63.1",
+      "tz": "2018e",
+      "unicode": "11.0"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v11.15.0/node-v11.15.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v11.15.0/node-v11.15.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v11.15.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18362",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "host": "DESKTOP-IRQRAA7"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff73a8bd24e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73a8bc0f9",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73a8bb923",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73a9adc22",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73add609e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73add5fd7",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73ae89a14",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73ae7f838",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73ae7e038",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73ae87967",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73ae879e6",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73afbf8b1",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff73b079786",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00000082d66d0481",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 241991680,
+    "totalCommittedMemory": 241991680,
+    "usedMemory": 223520104,
+    "availableMemory": 1297600496,
+    "memoryLimit": 1526909922,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 524288,
+        "committedMemory": 524288,
+        "capacity": 515584,
+        "used": 33520,
+        "available": 482064
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1031168,
+        "used": 1031136,
+        "available": 32
+      },
+      "old_space": {
+        "memorySize": 189468672,
+        "committedMemory": 189468672,
+        "capacity": 186196904,
+        "used": 178275800,
+        "available": 7921104
+      },
+      "code_space": {
+        "memorySize": 3670016,
+        "committedMemory": 3670016,
+        "capacity": 3421760,
+        "used": 2828288,
+        "available": 593472
+      },
+      "map_space": {
+        "memorySize": 7352320,
+        "committedMemory": 7352320,
+        "capacity": 7221680,
+        "used": 2901760,
+        "available": 4319920
+      },
+      "large_object_space": {
+        "memorySize": 39927808,
+        "committedMemory": 39927808,
+        "capacity": 1322733504,
+        "used": 38449600,
+        "available": 1284283904
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
+        "available": 0
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 169.765,
+    "kernelCpuSeconds": 1977.58,
+    "cpuConsumptionPercent": 0.821811,
+    "maxRss": 407838720,
+    "pageFaults": {
+      "IORequired": 833774,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 14429,
+      "writes": 48
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\Users\\arizona\\Desktop\\Brain\\Brain\\Brain\\neuron\\GraphBoard",
+    "=ExitCode": "00000000",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\arizona\\AppData\\Roaming",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "DESKTOP-IRQRAA7",
+    "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "CONDA_DEFAULT_ENV": "base",
+    "CONDA_EXE": "C:\\Users\\arizona\\Anaconda3\\Scripts\\conda.exe",
+    "CONDA_PREFIX": "C:\\Users\\arizona\\Anaconda3",
+    "CONDA_PROMPT_MODIFIER": "(base) ",
+    "CONDA_PYTHON_EXE": "C:\\Users\\arizona\\Anaconda3\\python.exe",
+    "CONDA_SHLVL": "1",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\arizona",
+    "INIT_CWD": "C:\\Users\\arizona\\Desktop\\Brain\\Brain\\Brain\\neuron\\GraphBoard",
+    "LOCALAPPDATA": "C:\\Users\\arizona\\AppData\\Local",
+    "LOGONSERVER": "\\\\DESKTOP-IRQRAA7",
+    "NUMBER_OF_PROCESSORS": "8",
+    "OneDrive": "C:\\Users\\arizona\\OneDrive",
+    "OneDriveConsumer": "C:\\Users\\arizona\\OneDrive",
+    "OPENSSL_CONF": "C:\\Program Files\\PostgreSQL\\psqlODBC\\etc\\openssl.cnf",
+    "OS": "Windows_NT",
+    "Path": "C:\\Users\\arizona\\Anaconda3;C:\\Users\\arizona\\Anaconda3\\Library\\mingw-w64\\bin;C:\\Users\\arizona\\Anaconda3\\Library\\usr\\bin;C:\\Users\\arizona\\Anaconda3\\Library\\bin;C:\\Users\\arizona\\Anaconda3\\Scripts;C:\\Users\\arizona\\Anaconda3\\bin;C:\\Users\\arizona\\Anaconda3\\condabin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Windows\\System32\\OpenSSH;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Git\\cmd;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NGX;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\Program Files\\PostgreSQL\\11\\bin;C:\\Program Files (x86)\\Graphviz2.38\\bin;C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe;C:\\Program Files\\nodejs;C:\\texlive\\2019\\bin\\win32;C:\\Users\\arizona\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\arizona\\AppData\\Local\\Programs\\MiKTeX 2.9\\miktex\\bin\\x64;C:\\Users\\arizona\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "9e0d",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "(base) $P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\Windows",
+    "TEMP": "C:\\Users\\arizona\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\arizona\\AppData\\Local\\Temp",
+    "USERDOMAIN": "DESKTOP-IRQRAA7",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-IRQRAA7",
+    "USERNAME": "arizona",
+    "USERPROFILE": "C:\\Users\\arizona",
+    "windir": "C:\\Windows"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Program Files\\AVAST Software\\Avast\\aswhook.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\System32\\UMPDC.dll",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\system32\\wshbth.dll",
+    "C:\\Windows\\System32\\rasadhlp.dll",
+    "C:\\Windows\\System32\\fwpuclnt.dll"
+  ]
+}

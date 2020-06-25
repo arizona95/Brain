@@ -65,8 +65,8 @@ import {
   NeuronNetworkMaker,
   Simulator,
 } from './component';
-import socketio from 'socket.io-client';
-const socket = socketio.connect('http://localhost:3030')
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:3030')
 
 class Home extends React.Component {
 
