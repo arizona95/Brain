@@ -231,61 +231,8 @@ node {
 	input: "Inner/G0/b#0/Na+ at Axon"
 }
 node {
-  name: "LIF Trainer/G0/b#0/NMDAR"
+  name: "Train/G0/a/@Output~Global~Spike"
   op: "matmul"
-	input: "LIF Trainer/G0/b#0/@Input~Local~Spike"
-}
-node {
-  name: "LIF Trainer/G0/b#0/Ca+"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/NMDAR"
-}
-node {
-  name: "LIF Trainer/G0/b#0/PKC"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/Ca+"
-}
-node {
-  name: "LIF Trainer/G0/b#0/CaMK2"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/Ca+"
-}
-node {
-  name: "LIF Trainer/G0/b#0/AMPAR"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/CaMK2"
-	input: "LIF Trainer/G0/b#0/PKC"
-}
-node {
-  name: "LIF Trainer/G0/b#0/Na+ at Synaps"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/AMPAR"
-}
-node {
-  name: "LIF Trainer/G0/b#0/@Input~Global~Resist"
-  op: "matmul"
-}
-node {
-  name: "LIF Trainer/G0/b#0/Na+ at Axon"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/Na+ at Synaps"
-	input: "LIF Trainer/G0/b#0/@Input~Global~Resist"
-	input: "LIF Trainer/G0/b#0/@Input~Global~Spike"
-}
-node {
-  name: "LIF Trainer/G0/b#0/Na+ Channel"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/Na+ at Axon"
-}
-node {
-  name: "LIF Trainer/G0/b#0/GPSP"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/Na+ at Axon"
-}
-node {
-  name: "LIF Trainer/G0/b#0/@Output~Global~Spike"
-  op: "matmul"
-	input: "LIF Trainer/G0/b#0/GPSP"
 }
 node {
   name: "LIF Trainer/G0/b#0/@Input~Global~Spike"
@@ -293,70 +240,14 @@ node {
 	input: "LIF Trainer/G0/a#0/@Output~Global~Spike"
 }
 node {
-  name: "LIF Trainer/G0/b#0/@Input~Local~Spike"
+  name: "LIF Trainer/G0/b#0/Inner"
   op: "matmul"
+	input: "LIF Trainer/G0/b#0/@Input~Global~Spike"
 }
 node {
-  name: "LIF Trainer/G0/b#0/@Output~Global~Generator"
+  name: "LIF Trainer/G0/b#0/@Output~Global~Spike"
   op: "matmul"
-	input: "LIF Trainer/G0/b#0/Na+ at Axon"
-}
-node {
-  name: "LIF Trainer/G0/a#0/NMDAR"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/@Input~Local~Spike"
-}
-node {
-  name: "LIF Trainer/G0/a#0/Ca+"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/NMDAR"
-}
-node {
-  name: "LIF Trainer/G0/a#0/PKC"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/Ca+"
-}
-node {
-  name: "LIF Trainer/G0/a#0/CaMK2"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/Ca+"
-}
-node {
-  name: "LIF Trainer/G0/a#0/AMPAR"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/CaMK2"
-	input: "LIF Trainer/G0/a#0/PKC"
-}
-node {
-  name: "LIF Trainer/G0/a#0/Na+ at Synaps"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/AMPAR"
-}
-node {
-  name: "LIF Trainer/G0/a#0/@Input~Global~Resist"
-  op: "matmul"
-}
-node {
-  name: "LIF Trainer/G0/a#0/Na+ at Axon"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/Na+ at Synaps"
-	input: "LIF Trainer/G0/a#0/@Input~Global~Resist"
-	input: "LIF Trainer/G0/a#0/@Input~Global~Spike"
-}
-node {
-  name: "LIF Trainer/G0/a#0/Na+ Channel"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/Na+ at Axon"
-}
-node {
-  name: "LIF Trainer/G0/a#0/GPSP"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/Na+ at Axon"
-}
-node {
-  name: "LIF Trainer/G0/a#0/@Output~Global~Spike"
-  op: "matmul"
-	input: "LIF Trainer/G0/a#0/GPSP"
+	input: "LIF Trainer/G0/b#0/Inner"
 }
 node {
   name: "LIF Trainer/G0/a#0/@Input~Global~Spike"
@@ -364,15 +255,12 @@ node {
 	input: "Train/G0/a/@Output~Global~Spike"
 }
 node {
-  name: "LIF Trainer/G0/a#0/@Input~Local~Spike"
+  name: "LIF Trainer/G0/a#0/Inner"
   op: "matmul"
+	input: "LIF Trainer/G0/a#0/@Input~Global~Spike"
 }
 node {
-  name: "LIF Trainer/G0/a#0/@Output~Global~Generator"
+  name: "LIF Trainer/G0/a#0/@Output~Global~Spike"
   op: "matmul"
-	input: "LIF Trainer/G0/a#0/Na+ at Axon"
-}
-node {
-  name: "Train/G0/a/@Output~Global~Spike"
-  op: "matmul"
+	input: "LIF Trainer/G0/a#0/Inner"
 }

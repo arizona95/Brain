@@ -7,7 +7,7 @@ class Config(object):
     """Parent configuration class"""
 
     ENV = 'default'
-    NAME = 'CDA'
+    NAME = 'navy'
     PROJECT_ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     UPLOAD_DIR = os.path.join(PROJECT_ROOT, 'api', 'app', 'static', 'upload')
     DEBUG = False

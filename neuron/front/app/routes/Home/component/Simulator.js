@@ -292,7 +292,7 @@ class Simulator extends React.Component {
           </ListGroup>
         </Col>
           <Col xs={10} sm={10} md={7} style = {{"padding": "0px"}}>
-            <iframe key={1} src={"http://localhost:8001/demo/index.html?"+this.props.refreshTensorboard} width="1100vw" height="1180vh"/>
+            <iframe key={1} src={"http://localhost:8001/demo/index.html?"+this.props.refreshTensorboard} width="1050vw" height="1180vh"/>
           </Col>
           <Col xs={2} sm={2} md={3} style={{ "padding": "0px" }}>
           <td onClick={() => window.open("Debug", "_blank")}>Debug</td>

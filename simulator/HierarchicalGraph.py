@@ -47,7 +47,7 @@ class HierarchicalGraph :
 		self.age = 0
 		self.pointer = 0
 
-		self.debug = True
+		self.debug = False
 		self.debug_dict = dict()
 		self.debug_show = dict()
 		self.debug_show_time = 30
