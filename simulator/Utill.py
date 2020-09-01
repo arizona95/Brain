@@ -149,6 +149,14 @@ class Utill :
 
 		return RDF_list
 
+	def make_float_dict(self, dirty_edge) :
+
+		func_list = ["R_x", "D_x", "F_x"]
+
+		for func_name in func_list :
+			for func_index in dirty_edge[func_name] :
+				dirty_edge[func_name][func_index]["value"] = float(dirty_edge[func_name][func_index]["value"])
+
 
 	def make_RDF_function(self, filename, db_name, dirty_info) :
 
@@ -165,18 +173,22 @@ class Utill :
 				from_label = id_to_label[dirty_edge["from"]]
 				to_label = id_to_label[dirty_edge["to"]]
 				edge_label =  from_label + self.Args.label_maker_str + to_label
+				self.make_float_dict(dirty_edge)
 				self.RDF_function[filename] [edge_label] = {
 					"R_x": self.RDF_dict_to_list(dirty_edge["R_x"]),
 					"D_x": self.RDF_dict_to_list(dirty_edge["D_x"]),
 					"F_x": self.RDF_dict_to_list(dirty_edge["F_x"]),
 				}
 
-	def make_list_to_line_chart_data(self, chart_list_data):
+
+	def make_list_to_line_chart_data(self, chart_list_data, age):
 		chart_data = []
+
+		start_age = age - len(chart_list_data)
 
 		for index, data in enumerate(chart_list_data) :
 			chart_data.append({
-				"name": str(index),
+				"name": str(start_age+index),
 				"value": data*10000,
 			})
 		return chart_data

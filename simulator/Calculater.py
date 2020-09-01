@@ -36,8 +36,8 @@ class Calculater :
 
 		# local -> local
 
-
 		RDF_dict = self.Utill.RDF_function[neuron_model_name][edge_label]
+
 		R_x = RDF_dict["R_x"]
 		D_x = RDF_dict["D_x"]
 		F_x = RDF_dict["F_x"]
@@ -75,4 +75,24 @@ class Calculater :
 
 		if to_locality == self.Args.locality_string["local"] : Y['ndv'] = Y['ndv'] + dY
 		elif to_locality == self.Args.locality_string["global"] : Y['ndv'] = Y['ndv'] + sum(dY)
+
+		if edge_label == "@Input~Global~Spike -> Inner" :
+			print("rdf")
+			print(RDF_dict)
+			print("X")
+			print(X)
+			print("Y")
+			print(Y)
+			print("y-x")
+			print( Y['v'] - X['v'])
+			x = Y['v'] - X['v']
+			D_x_dy = D_x[4]+D_x[5]*x
+			D_x_dy = D_x[3]+D_x_dy*x
+			D_x_dy = D_x[2]+D_x_dy*x
+			D_x_dy = D_x[1]+D_x_dy*x
+			D_x_dy = D_x[0]+D_x_dy*x
+			print("D_x_dy")
+			print(D_x_dy)
+			print("==========================")
+
 		

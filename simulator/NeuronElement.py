@@ -118,9 +118,10 @@ class NeuronElement :
 				input_global_node["queue"][index][input_global_node["time_point"]] = input_global_node["output_pointer"][index]['v']
 
 			# get v, dv in queue  - global : sum inputs
-			input_value = np.array([sum(input_local_node["queue"][:,self.graph.pointer])])
-			input_global_node["value"]["dv"] = input_value - input_local_node["value"]["v"]
-			input_local_node["value"]["v"] = input_value
+
+			input_value = np.array([sum(input_global_node["queue"][:,self.graph.pointer])])
+			input_global_node["value"]["dv"] = input_value - input_global_node["value"]["v"]
+			input_global_node["value"]["v"] = input_value
 
 			# time point => circulate
 			input_global_node["time_point"] = (input_global_node["time_point"]+1)& self.Args.time_interval_cycle_queue_moduler
@@ -158,15 +159,19 @@ class NeuronElement :
 						synaps_label_list = self.graph.node_label_dict[neuron_model_label]["local_synaps"]
 						for neuron_element_label in neuron_model_info["data"]:
 							neuron_model_info["data"][neuron_element_label]["data"] = dict()
-							neuron_element_info = neuron_model_info["data"][neuron_element_label]["data"]
+							neuron_element_info = neuron_model_info["data"][neuron_element_label]
 							neuron_element_info["locality"]= self.graph.node_label_dict[neuron_element_label]["locality"]
 							value_history = self.graph.debug_dict[neuron_model_label]["element_history"][neuron_element_label]["value_history"][-self.graph.debug_show_time:].T.tolist()
 							if neuron_element_info["locality"] == self.Args.locality_string['global'] :
-								neuron_element_info["global_synaps"] = {"label": "global_synaps", "data": self.Utill.make_list_to_line_chart_data(value_history[0])}
+								neuron_element_info["data"]["global_synaps"] = {"label": "global_synaps", "data": self.Utill.make_list_to_line_chart_data(value_history[0], self.graph.age)}
 							else :
 								for synaps_index, synaps_label in enumerate(self.graph.node_label_dict[neuron_model_label]["local_synaps"]) :
-									neuron_element_info[synaps_label] = {"label": synaps_label, "data": self.Utill.make_list_to_line_chart_data(value_history[synaps_index])}
+									neuron_element_info["data"][synaps_label] = {"label": synaps_label, "data": self.Utill.make_list_to_line_chart_data(value_history[synaps_index], self.graph.age)}
+			else_info = {
+				"age": self.graph.age,
+			}
 
+<<<<<<< HEAD
 			debug_info = {
 				'debug_info' : debug_info,
 				'else_info' : {
@@ -175,6 +180,12 @@ class NeuronElement :
 			}
 
 			self.socketIO.emit('debug_info',debug_info)
+=======
+			self.socketIO.emit('debug_info',{
+				"debug_info": debug_info,
+				"else_info": else_info
+			})
+>>>>>>> a104df274e133664e4b6886b57b49a26c0b17da6
 
 
 
@@ -182,5 +193,5 @@ class NeuronElement :
 		self.graph.age = self.graph.age+1
 
 		# cycle pointer
-		self.graph.pointer = self.graph.pointer & self.Args.time_interval_cycle_queue_moduler
+		self.graph.pointer = (self.graph.pointer+1) & self.Args.time_interval_cycle_queue_moduler
 
