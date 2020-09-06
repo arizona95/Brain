@@ -127,7 +127,6 @@ class neuronModelMaker extends React.Component {
       shape: 'image',
       image: 'http://localhost:3030/static/neuronElement/Else.png',
       group: 'Else',
-      function:'none',
       initial: 0.1,
       bound_max: 1,
       bound_min: 0,
@@ -817,13 +816,13 @@ class neuronModelMaker extends React.Component {
 
               </Col>
             ) : this.state.selectingNode == true ? (
-              <Col xs={5} sm={5} md={4}>
+              <Col xs={2} sm={2} md={2}>
                 <Table>
                   <tr>
                     <td><h5>{'Name'}</h5></td>
                     <td colSpan="5">
                       <Input
-                        style={{ width: '17vw' }}
+                        style={{ width: '10vw' }}
                         placeholder=""
                         value={selectedNode.label}
                         onChange={(e) => this.onChangeNodeParameterChange('label', e.target.value)}
@@ -859,27 +858,18 @@ class neuronModelMaker extends React.Component {
                         checked={selectedNode.role == '@Inner'}
                         onChange={() => this.onChangeNodeParameterChange('role', '@Inner')}
                       /><h6>{'Inner'}</h6>
+                    </td></tr><tr><td/>
+                    <td>
+                      <Toggle
+                        checked={selectedNode.role == '@Backprop'}
+                        onChange={() => this.onChangeNodeParameterChange('role', '@Backprop')}
+                      /><h6>{'Backprop'}</h6>
                     </td>
                     <td>
                       <Toggle
                         checked={selectedNode.role == '@Output'}
                         onChange={() => this.onChangeNodeParameterChange('role', '@Output')}
                       /><h6>{'Output'}</h6>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><h5>{'Func'}</h5></td>
-                    <td>
-                      <Toggle
-                        checked={selectedNode.function == 'none'}
-                        onChange={() => this.onChangeNodeParameterChange('function', 'none')}
-                      /><h6>{'None'}</h6>
-                    </td>
-                    <td>
-                      <Toggle
-                        checked={selectedNode.function == 'suicide'}
-                        onChange={() => this.onChangeNodeParameterChange('function', 'suicide')}
-                      /><h6>{'Suicide'}</h6>
                     </td>
                   </tr>
                   <tr>
@@ -895,7 +885,7 @@ class neuronModelMaker extends React.Component {
                         checked={selectedNode.image == DIR + 'Ion.png'}
                         onChange={() => this.onChangeNodeParameterChange('image', DIR + 'Ion.png')}
                       /><h6>{'Ion'}</h6>
-                    </td>
+                    </td></tr><tr><td/>
                     <td>
                       <Toggle
                         checked={selectedNode.image == DIR + 'Protein.png'}
@@ -907,7 +897,7 @@ class neuronModelMaker extends React.Component {
                         checked={selectedNode.image == DIR + 'Energe.png'}
                         onChange={() => this.onChangeNodeParameterChange('image', DIR + 'Energe.png')}
                       /><h6>{'Energe'}</h6>
-                    </td>
+                    </td></tr><tr><td/>
                     <td>
                       <Toggle
                         checked={selectedNode.image == DIR + 'Else.png'}
@@ -932,7 +922,7 @@ class neuronModelMaker extends React.Component {
                     <td colSpan="5">
                       <Row style={{ 'margin': '0px' }}>
                         <Input
-                          style={{ width: '5vw' }}
+                          style={{ width: '3vw' }}
                           placeholder=""
                           value={selectedNode.bound_min}
                           onChange={(e) => this.onChangeNodeParameterChange('bound_min', e.target.value)}
@@ -940,7 +930,7 @@ class neuronModelMaker extends React.Component {
                         </Input>
                         <h5>{'~'}</h5>
                         <Input
-                          style={{ width: '5vw' }}
+                          style={{ width: '3vw' }}
                           placeholder=""
                           value={selectedNode.bound_max}
                           onChange={(e) => this.onChangeNodeParameterChange('bound_max', e.target.value)}
@@ -964,6 +954,109 @@ class neuronModelMaker extends React.Component {
                 </Table>
               </Col>
             ) : (<div></div>)
+          }
+          {
+            this.state.selectingNode == true ? (<Col xs={5} sm={5} md={2}>
+                  <ListGroup style={{ width: '15vw' }}>
+                    {
+                      _.map(this.props.graphInitializationList, (graphInfo, index) => (
+                        <div>
+                          <Row>
+                            {
+                              graphInfo.id == this.props.nowGraphInitializationId ? (
+                                <ListGroupItem
+                                  key={index}
+                                  style={{ 'backgroundColor': '#9f92ca', margin: '2px', width: '15vw' }}
+                                  tag="button"
+                                  onClick={() => {
+                                    this.props.setNowGraphInitializationId(graphInfo.id);
+                                  }}
+                                  action href="#">
+                        <span className="ml-1 text-inverse"
+                              ref={(el) => {
+                                if (el) {
+                                  el.style.setProperty('color', '#000000', 'important');
+                                }
+                              }}>
+                          <MathJax.Context input='ascii'><MathJax.Node
+                            inline>{graphInfo.name}</MathJax.Node></MathJax.Context>
+                        </span>
+                                </ListGroupItem>) : (
+                                <ListGroupItem
+                                  key={index}
+                                  style={{ 'backgroundColor': '#2f2b3c', margin: '2px', width: '15vw' }}
+                                  tag="button"
+                                  onClick={() => {
+                                    this.props.setNowGraphInitializationId(graphInfo.id);
+                                  }}
+                                  action href="#">
+                        <span className="ml-1 text-inverse"
+                              ref={(el) => {
+                                if (el) {
+                                  el.style.setProperty('color', '#000000', 'important');
+                                }
+                              }}>
+                          <MathJax.Context input='ascii'><MathJax.Node
+                            inline>{graphInfo.name}</MathJax.Node></MathJax.Context>
+                        </span>
+                                </ListGroupItem>
+                              )
+                            }
+                          </Row>
+                          {
+                            graphInfo.id == this.props.nowGraphInitializationId ? (
+                              <div>
+                                <Row>
+                                  <div id="S_x"
+                                       style={{ 'width': '15vw', 'height': '27vh', 'backgroundColor': '#cccccc' }}>
+                                  </div>
+                                </Row>
+                                <Row>
+                                  <ButtonGroup>
+                                    <Button
+                                      style={{ 'width': '5vw', 'backgroundColor': '#f27f87' }}
+                                      className="text-white"
+                                      outline
+                                      onClick={() => {
+                                        this.onClickEdgeParameterChange(0);
+                                      }}
+                                    ><i className="fa fa-line-chart"/>{' '}
+                                      <MathJax.Context input='ascii'><MathJax.Node
+                                        inline>R(X)</MathJax.Node></MathJax.Context>
+                                    </Button>
+                                    <Button
+                                      style={{ 'width': '5vw', 'backgroundColor': '#37B940' }}
+                                      className="text-white"
+                                      outline
+                                      onClick={() => {
+                                        this.onClickEdgeParameterChange(1);
+                                      }}
+                                    ><i className="fa fa-line-chart"/>{' '}
+                                      <MathJax.Context input='ascii'><MathJax.Node
+                                        inline>D(X)</MathJax.Node></MathJax.Context>
+                                    </Button>
+                                    <Button
+                                      style={{ 'width': '5vw', 'backgroundColor': '#30BDB4' }}
+                                      className="text-white"
+                                      outline
+                                      onClick={() => {
+                                        this.onClickEdgeParameterChange(2);
+                                      }}
+                                    ><i className="fa fa-line-chart"/>{' '}
+                                      <MathJax.Context input='ascii'><MathJax.Node
+                                        inline>F(X)</MathJax.Node></MathJax.Context>
+                                    </Button>
+                                  </ButtonGroup>
+                                </Row>
+                              </div>
+                            ) : (<div/>)
+                          }
+                        </div>
+                      ))
+                    }
+                  </ListGroup>
+                </Col>)
+            :(<div></div>)
           }
           {
             this.state.selectingEdge == true ? (

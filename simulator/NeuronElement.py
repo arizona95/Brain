@@ -171,21 +171,15 @@ class NeuronElement :
 				"age": self.graph.age,
 			}
 
-<<<<<<< HEAD
-			debug_info = {
-				'debug_info' : debug_info,
-				'else_info' : {
-					'age': self.graph.age,
-				}
-			}
-
-			self.socketIO.emit('debug_info',debug_info)
-=======
+			print("test")
+			print(else_info)
+			print(debug_info)
 			self.socketIO.emit('debug_info',{
 				"debug_info": debug_info,
 				"else_info": else_info
 			})
->>>>>>> a104df274e133664e4b6886b57b49a26c0b17da6
+			
+
 
 
 

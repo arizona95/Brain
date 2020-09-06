@@ -76,6 +76,7 @@ class Calculater :
 		if to_locality == self.Args.locality_string["local"] : Y['ndv'] = Y['ndv'] + dY
 		elif to_locality == self.Args.locality_string["global"] : Y['ndv'] = Y['ndv'] + sum(dY)
 
+		"""
 		if edge_label == "@Input~Global~Spike -> Inner" :
 			print("rdf")
 			print(RDF_dict)
@@ -94,5 +95,7 @@ class Calculater :
 			print("D_x_dy")
 			print(D_x_dy)
 			print("==========================")
+
+		"""
 
 		

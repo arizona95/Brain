@@ -73,7 +73,7 @@ class Home extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      view: 'simulator',
+      view: 'neuronModelMaker',
       refreshTensorboard:0,
 
       graphInitializationList:{},
