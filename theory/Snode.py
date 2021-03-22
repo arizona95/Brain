@@ -2,16 +2,13 @@
 from Args import Args
 import pandas
 
-class Node : 
+class Snode : 
 
-	def __init__(self, node_info) :
+	def __init__(self, snode_info) :
 
-		self.m = node_info.material
-		self.label = node_info.name
-		self.s = node_info.space_size
-		self.q = node_info.coulomb
-		self.h = node_info.entalphy
-		self.c = node_info.density
+		self.label = snode_info["label"]
+		self.node = snode_info["node_included"]
+		self.loc = snode_info["location"]
 		#self.p = node_info.momentum
 
 

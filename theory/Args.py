@@ -6,6 +6,4 @@ class Args:
 
 	def __init__(self):
 		#material
-		
-
-
+		dt = 0.001

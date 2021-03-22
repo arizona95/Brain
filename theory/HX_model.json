@@ -1,131 +1,104 @@
 {
-	"material_info": [
-		"na",
-		"k",
-		"cl",
-		"minus_proteinch_na",
-		"ch_k",
-		"ch_leak_k",
-		"ch_na_kch_na_activator",
-		"ch_na_inactivator",
-		"ch_k_activator",
-		"atp"
-	],
 	"node_info": [
-		[
-			"na_in",
-			[
+		{
+			"label": "na_in",
+			"material": [
 				[
 					"na",
 					1
 				]
 			],
-			1,
-			0
-		],
-		[
-			"na_out",
-			[
+			"coulomb": 1,
+			"entalphy": 0,
+			"density": 10
+		},
+		{
+			"label": "na_out",
+			"material": [
 				[
 					"na",
 					1
 				]
 			],
-			1,
-			0
-		],
-		[
-			"k_in",
-			[
+			"coulomb": 1,
+			"entalphy": 0,
+			"density": 140
+		},
+		{
+			"label": "k_in",
+			"material": [
 				[
 					"k",
 					1
 				]
 			],
-			1,
-			0
-		],
-		[
-			"k_out",
-			[
+			"coulomb": 1,
+			"entalphy": 0,
+			"density": 150
+		},
+		{
+			"label": "k_out",
+			"material": [
 				[
 					"k",
 					1
 				]
 			],
-			1,
-			0
-		],
-		[
-			"cl_in",
-			[
+			"coulomb": 1,
+			"entalphy": 0,
+			"density": 5
+		},
+		{
+			"label": "cl_in",
+			"material": [
 				[
 					"cl",
 					1
 				]
 			],
-			-1,
-			0
-		],
-		[
-			"cl_out",
-			[
+			"coulomb": -1,
+			"entalphy": 0,
+			"density": 15
+		},
+		{
+			"label": "cl_out",
+			"material": [
 				[
 					"cl",
 					1
 				]
 			],
-			-1,
-			0
-		],
-		[
-			"minus_protein_in",
-			[
+			"coulomb": -1,
+			"entalphy": 0,
+			"density": 100
+		},
+		{
+			"label": "minus_protein_in",
+			"material": [
 				[
 					"minus_protein",
 					1
 				]
 			],
-			1,
-			0
-		],
-		[
-			"ch_na_inactivate",
-			[
+			"coulomb": 1,
+			"entalphy": 0,
+			"density": 100
+		},
+		{
+			"label": "ch_na_inactivate",
+			"material": [
 				[
 					"ch_na",
 					1
 				]
 			],
-			-1,
-			0
-		],
-		[
-			"ch_na_activate_run",
-			[
-				[
-					"ch_na",
-					1
-				],
-				[
-					"ch_na_activator",
-					3
-				],
-				[
-					"ch_na_inactivator",
-					1
-				],
-				[
-					"na",
-					1
-				]
-			],
-			1,
-			0
-		],
-		[
-			"ch_na_activate_rest",
-			[
+			"coulomb": -1,
+			"entalphy": 0,
+			"density": 1
+		},
+		{
+			"label": "ch_na_activate",
+			"material": [
 				[
 					"ch_na",
 					1
@@ -139,86 +112,101 @@
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_na_activator_activate",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0
+		},
+		{
+			"label": "ch_na_activator_activate",
+			"material": [
 				[
 					"ch_na_activator",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_na_activator_inactivate",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0
+		},
+		{
+			"label": "ch_na_activator_inactivate",
+			"material": [
 				[
 					"ch_na_activator",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_na_inactivator_activate",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 1
+		},
+		{
+			"label": "ch_na_inactivator_activate",
+			"material": [
 				[
 					"ch_na_inactivator",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_na_inactivator_inactivate",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0
+		},
+		{
+			"label": "ch_na_inactivator_inactivate",
+			"material": [
 				[
 					"ch_na_inactivator",
 					1
+				],
+				[
+					"ch_na_inactivator_activator",
+					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_k_inactivate",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 1
+		},
+		{
+			"label": "ch_na_inactivator_activator_activate",
+			"material": [
+				[
+					"ch_na_inactivator_activator",
+					1
+				]
+			],
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0
+		},
+		{
+			"label": "ch_na_inactivator_activator_inactivate",
+			"material": [
+				[
+					"ch_na_inactivator_activator",
+					1
+				]
+			],
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0
+		},
+		{
+			"label": "ch_k_inactivate",
+			"material": [
 				[
 					"ch_k",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_k_activate_run",
-			[
-				[
-					"ch_k",
-					1
-				],
-				[
-					"ch_k_activator",
-					4
-				],
-				[
-					"k",
-					1
-				]
-			],
-			1,
-			0
-		],
-		[
-			"ch_k_activate_rest",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 1
+		},
+		{
+			"label": "ch_k_activate",
+			"material": [
 				[
 					"ch_k",
 					1
@@ -228,169 +216,209 @@
 					4
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_k_activator_activate",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0
+		},
+		{
+			"label": "ch_k_activator_activate",
+			"material": [
 				[
 					"ch_k_activator",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_k_activator_inactivate",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0
+		},
+		{
+			"label": "ch_k_activator_inactivate",
+			"material": [
 				[
 					"ch_k_activator",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_leak_k_activate_run",
-			[
-				[
-					"ch_leak_k",
-					1
-				],
-				[
-					"k",
-					1
-				]
-			],
-			0,
-			0
-		],
-		[
-			"ch_leak_k_activate_rest",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 1
+		},
+		{
+			"label": "ch_leak_k_activate",
+			"material": [
 				[
 					"ch_leak_k",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"ch_na_k_activate_run",
-			[
-				[
-					"ch_na_k",
-					1
-				],
-				[
-					"na",
-					3
-				],
-				[
-					"k",
-					2
-				]
-			],
-			0,
-			0
-		],
-		[
-			"ch_na_k_activate_rest",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 1
+		},
+		{
+			"label": "ch_na_k_activate",
+			"material": [
 				[
 					"ch_na_k",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"atp",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 1
+		},
+		{
+			"label": "atp",
+			"material": [
 				[
 					"atp",
 					1
 				]
 			],
-			0,
-			0
-		],
-		[
-			"adp",
-			[
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0.5
+		},
+		{
+			"label": "adp",
+			"material": [
 				[
 					"atp",
 					1
 				]
 			],
-			0,
-			0
-		]
+			"coulomb": 0,
+			"entalphy": 0,
+			"density": 0.5
+		}
 	],
 	"edge_info": [
-		[
-			[
+		{
+			"label": "1 ch_na_activator_activate => 1 ch_na_activator_inactivate",
+			"reactant": [
 				[
 					"ch_na_activator_activate",
 					1
 				]
 			],
-			[
-				[
-					"ch_na_activator_inactivate",
-					1
-				]
-			]
-		],
-		[
-			[
+			"product": [
 				[
 					"ch_na_activator_inactivate",
 					1
 				]
 			],
-			[
+			"added_energe": 0.05555555555555555,
+			"response_coefficient": 4,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_activator_inactivate => 1 ch_na_activator_activate",
+			"reactant": [
+				[
+					"ch_na_activator_inactivate",
+					1
+				]
+			],
+			"product": [
 				[
 					"ch_na_activator_activate",
 					1
 				]
-			]
-		],
-		[
-			[
-				[
-					"ch_na_inactivator_activate",
-					1
-				]
 			],
-			[
-				[
-					"ch_na_inactivator_inactivate",
-					1
-				]
-			]
-		],
-		[
-			[
+			"added_energe": -0.05,
+			"response_coefficient": 0.22,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_inactivator_inactivate => 1 ch_na_inactivator_activate",
+			"reactant": [
 				[
 					"ch_na_inactivator_inactivate",
 					1
 				]
 			],
-			[
+			"product": [
 				[
 					"ch_na_inactivator_activate",
 					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"added_energe": 0.1,
+			"response_coefficient": 20,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_inactivator_inactivate => 1 ch_na_inactivator_activate",
+			"reactant": [
+				[
+					"ch_na_inactivator_inactivate",
+					1
+				]
+			],
+			"product": [
+				[
+					"ch_na_inactivator_activate",
+					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_inactivator_activate + 1 ch_na_inactivator_inactivate => 1 ch_na_inactivator_inactivate",
+			"reactant": [
+				[
+					"ch_na_inactivator_activate",
+					1
+				],
+				[
+					"ch_na_inactivator_inactivate",
+					1
+				]
+			],
+			"product": [
+				[
+					"ch_na_inactivator_inactivate",
+					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_inactivator_inactivate => 1 ch_na_inactivator_activate + 1 ch_na_inactivator_inactivate",
+			"reactant": [
+				[
+					"ch_na_inactivator_inactivate",
+					1
+				]
+			],
+			"product": [
+				[
+					"ch_na_inactivator_activate",
+					1
+				],
+				[
+					"ch_na_inactivator_inactivate",
+					1
+				]
+			],
+			"added_energe": 0.05,
+			"response_coefficient": 0.07,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_inactivate + 3 ch_na_activator_activate + 1 ch_na_inactivator_activate => 1 ch_na_activate",
+			"reactant": [
 				[
 					"ch_na_inactivate",
 					1
@@ -404,21 +432,26 @@
 					1
 				]
 			],
-			[
+			"product": [
 				[
-					"ch_k_activate_rest",
-					1
-				]
-			]
-		],
-		[
-			[
-				[
-					"ch_k_activate_rest",
+					"ch_na_activate",
 					1
 				]
 			],
-			[
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_activate => 1 ch_na_inactivate + 3 ch_na_activator_activate + 1 ch_na_inactivator_activate",
+			"reactant": [
+				[
+					"ch_na_activate",
+					1
+				]
+			],
+			"product": [
 				[
 					"ch_na_inactivate",
 					1
@@ -431,74 +464,134 @@
 					"ch_na_inactivator_activate",
 					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_activate + 1 na_in => 1 ch_na_activate + 1 na_out",
+			"reactant": [
+				[
+					"ch_na_activate",
+					1
+				],
 				[
 					"na_in",
 					1
+				]
+			],
+			"product": [
+				[
+					"ch_na_activate",
+					1
 				],
-				[
-					"ch_na_activate_rest",
-					1
-				]
-			],
-			[
-				[
-					"ch_na_activate_run",
-					1
-				]
-			]
-		],
-		[
-			[
-				[
-					"ch_na_activate_run",
-					1
-				]
-			],
-			[
 				[
 					"na_out",
 					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 1,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_activate + 1 na_in => 1 ch_na_activate + 1 na_out",
+			"reactant": [
+				[
+					"ch_na_activate",
+					1
 				],
 				[
-					"ch_na_activate_rest",
+					"na_in",
 					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"product": [
+				[
+					"ch_na_activate",
+					1
+				],
+				[
+					"na_out",
+					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_activate + 1 na_out => 1 ch_na_activate + 1 na_in",
+			"reactant": [
+				[
+					"ch_na_activate",
+					1
+				],
+				[
+					"na_out",
+					1
+				]
+			],
+			"product": [
+				[
+					"ch_na_activate",
+					1
+				],
+				[
+					"na_in",
+					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_k_activator_activate => 1 ch_k_activator_inactivate",
+			"reactant": [
 				[
 					"ch_k_activator_activate",
 					1
 				]
 			],
-			[
-				[
-					"ch_k_activator_inactivate",
-					1
-				]
-			]
-		],
-		[
-			[
+			"product": [
 				[
 					"ch_k_activator_inactivate",
 					1
 				]
 			],
-			[
+			"added_energe": 0.0125,
+			"response_coefficient": 0.125,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_k_activator_inactivate => 1 ch_k_activator_activate",
+			"reactant": [
+				[
+					"ch_k_activator_inactivate",
+					1
+				]
+			],
+			"product": [
 				[
 					"ch_k_activator_activate",
 					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"added_energe": -0.03333333333333333,
+			"response_coefficient": 0.058,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_k_inactivate + 4 ch_k_activator_activate => 1 ch_k_activate",
+			"reactant": [
 				[
 					"ch_k_inactivate",
 					1
@@ -508,21 +601,26 @@
 					4
 				]
 			],
-			[
+			"product": [
 				[
-					"ch_k_activate_rest",
-					1
-				]
-			]
-		],
-		[
-			[
-				[
-					"ch_k_activate_rest",
+					"ch_k_activate",
 					1
 				]
 			],
-			[
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_k_activate => 1 ch_k_inactivate + 4 ch_k_activator_activate",
+			"reactant": [
+				[
+					"ch_k_activate",
+					1
+				]
+			],
+			"product": [
 				[
 					"ch_k_inactivate",
 					1
@@ -531,118 +629,154 @@
 					"ch_k_activator_activate",
 					4
 				]
-			]
-		],
-		[
-			[
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_k_activate + 1 k_in => 1 ch_k_activate + 1 k_out",
+			"reactant": [
+				[
+					"ch_k_activate",
+					1
+				],
 				[
 					"k_in",
 					1
+				]
+			],
+			"product": [
+				[
+					"ch_k_activate",
+					1
 				],
-				[
-					"ch_k_activate_rest",
-					1
-				]
-			],
-			[
-				[
-					"ch_k_activate_run",
-					1
-				]
-			]
-		],
-		[
-			[
-				[
-					"ch_k_activate_run",
-					1
-				]
-			],
-			[
 				[
 					"k_out",
 					1
-				],
-				[
-					"ch_k_activate_rest",
-					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 1,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_k_activate + 1 k_in => 1 ch_k_activate + 1 k_out",
+			"reactant": [
+				[
+					"ch_k_activate",
+					1
+				],
 				[
 					"k_in",
 					1
+				]
+			],
+			"product": [
+				[
+					"ch_k_activate",
+					1
 				],
-				[
-					"ch_leak_k_activate_rest",
-					1
-				]
-			],
-			[
-				[
-					"ch_leak_k_activate_run",
-					1
-				]
-			]
-		],
-		[
-			[
-				[
-					"ch_leak_k_activate_run",
-					1
-				]
-			],
-			[
 				[
 					"k_out",
 					1
-				],
-				[
-					"ch_leak_k_activate_rest",
-					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_k_activate + 1 k_out => 1 ch_k_activate + 1 k_in",
+			"reactant": [
+				[
+					"ch_k_activate",
+					1
+				],
 				[
 					"k_out",
 					1
+				]
+			],
+			"product": [
+				[
+					"ch_k_activate",
+					1
 				],
-				[
-					"ch_leak_k_activate_rest",
-					1
-				]
-			],
-			[
-				[
-					"ch_leak_k_activate_run",
-					1
-				]
-			]
-		],
-		[
-			[
-				[
-					"ch_leak_k_activate_run",
-					1
-				]
-			],
-			[
 				[
 					"k_in",
 					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_leak_k_activate + 1 k_in => 1 ch_leak_k_activate + 1 k_out",
+			"reactant": [
+				[
+					"ch_leak_k_activate",
+					1
 				],
 				[
-					"ch_leak_k_activate_rest",
+					"k_in",
 					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"product": [
+				[
+					"ch_leak_k_activate",
+					1
+				],
+				[
+					"k_out",
+					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_leak_k_activate + 1 k_out => 1 ch_leak_k_activate + 1 k_in",
+			"reactant": [
+				[
+					"ch_leak_k_activate",
+					1
+				],
+				[
+					"k_out",
+					1
+				]
+			],
+			"product": [
+				[
+					"ch_leak_k_activate",
+					1
+				],
+				[
+					"k_in",
+					1
+				]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 ch_na_k_activate + 3 na_in + 2 k_out + 1 atp => 1 ch_na_k_activate + 3 na_out + 2 k_in + 1 adp",
+			"reactant": [
+				[
+					"ch_na_k_activate",
+					1
+				],
 				[
 					"na_in",
 					3
@@ -652,33 +786,15 @@
 					2
 				],
 				[
-					"ch_na_k_inactivate",
-					1
-				],
-				[
 					"atp",
 					1
 				]
 			],
-			[
+			"product": [
 				[
-					"ch_leak_k_activate_run",
+					"ch_na_k_activate",
 					1
 				],
-				[
-					"adp",
-					1
-				]
-			]
-		],
-		[
-			[
-				[
-					"ch_leak_k_activate_run",
-					1
-				]
-			],
-			[
 				[
 					"na_out",
 					3
@@ -688,76 +804,85 @@
 					2
 				],
 				[
-					"ch_na_k_inactivate",
+					"adp",
 					1
 				]
-			]
-		],
-		[
-			[
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		},
+		{
+			"label": "1 adp => 1 atp",
+			"reactant": [
 				[
 					"adp",
 					1
 				]
 			],
-			[
+			"product": [
 				[
 					"atp",
 					1
 				]
-			]
-		]
+			],
+			"added_energe": 0,
+			"response_coefficient": 1,
+			"ohm_or_diff": 0,
+			"delay_time": 0
+		}
 	],
 	"snode_info": [
-		[
-			"cell_in",
-			[
+		{
+			"label": "cell_in",
+			"node_included": [
 				"na_in",
 				"k_in",
 				"cl_in",
 				"minus_protein_in",
-				"ch_na_activator_activatech_na_activator_inactivate",
+				"ch_na_activator_activate",
+				"ch_na_activator_inactivate",
 				"ch_na_inactivator_activate",
 				"ch_na_inactivator_inactivate",
+				"ch_na_inactivator_activator_activate",
+				"ch_na_inactivator_activator_inactivate",
 				"ch_k_activator_activate",
-				"ch_k_activator_inactivate"
+				"ch_k_activator_inactivate",
+				"atp",
+				"adp"
 			],
-			[
+			"location": [
 				0,
 				0
 			]
-		],
-		[
-			"cell_out",
-			[
+		},
+		{
+			"label": "cell_out",
+			"node_included": [
 				"na_out",
 				"k_out",
 				"cl_out"
 			],
-			[
+			"location": [
 				0,
 				1
 			]
-		],
-		[
-			"cell_membrane",
-			[
+		},
+		{
+			"label": "cell_membrane",
+			"node_included": [
 				"ch_na_inactivate",
-				"ch_na_activate_run",
-				"ch_na_activate_rest",
-				"ch_na_activator_activate",
+				"ch_na_activate",
 				"ch_k_inactivate",
-				"ch_k_activate_run",
-				"ch_k_activate_rest",
-				"ch_leak_k_activate_run",
-				"ch_leak_k_activate_rest",
-				"ch_na_k_activate_run",
-				"ch_na_k_activate_rest"
+				"ch_k_activate",
+				"ch_leak_k_activate",
+				"ch_na_k_activate"
 			],
-			[
+			"location": [
 				0,
 				2
 			]
-		]
+		}
 	]
 }

@@ -68,84 +68,93 @@ neuron_model_info_expression = {
     # edge label 규칙
     # 1A+3B->2C+4D 
     #  K = e^-p*k[A][B]^3
-    # [ [["A",1],["B",3]],  [["C",2],["D",4]], energe_add, k, p]
-    # [ [k2,k1], k3, k, k4]
+    # [ [k2,k1], k3, k, k4, t]
 
     "edge_info" : [
         ## Voltage Gated Na+ Channel
         # m_a <-> m_b 
-        [ [["ch_na_activator_activate",1]], [["ch_na_activator_inactivate",1]], 1/18, 4, 0],
-        [ [["ch_na_activator_inactivate",1]], [["ch_na_activator_activate",1]], -1/20,  0.22, 0],
+        [ [["ch_na_activator_activate",1]], [["ch_na_activator_inactivate",1]], 1/18, 4, 0, 0],
+        [ [["ch_na_activator_inactivate",1]], [["ch_na_activator_activate",1]], -1/20,  0.22, 0, 0],
         
         # j_a <-> j_b
-        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 1/10, 20, 0,],
-        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 0, 1, 0],
+        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 1/10, 20, 0, 0],
+        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 0, 1, 0, 0],
 
         # h_a <-> h_b 
-        [ [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_inactivate",1]], 0, 1,0],
-        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], 1/20, 7/100,0],
+        [ [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_inactivate",1]], 0, 1, 0, 0],
+        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], 1/20, 7/100, 0, 0],
         
-        # ch_na_inactivate <-> ch_na_activate_rest
-        [ [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]], [["ch_k_activate_rest",1]] , 0, 1,0],
-        [ [["ch_k_activate_rest",1]], [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]] , 0, 1,0],
+        # ch_na_inactivate <-> ch_na_activate
+        [ [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]], [["ch_na_activate",1]] , 0, 1, 0, 0],
+        [ [["ch_na_activate",1]], [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]] , 0, 1, 0, 0],
         
         # na_in <- na_out by Voltage Gated Na+ Channel
         #by ohm's law
         # j = (row) * v 
         # v = -(mu) * E
-        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1,1],
+        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, 1, 0],
 
         #by diffusion
-        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1,0],
-        [ [["ch_na_activate",1], ["na_out",1]], [["ch_na_activate",1], ["na_in",1]] , 0, 1,0],
+        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, 0, 0],
+        [ [["ch_na_activate",1], ["na_out",1]], [["ch_na_activate",1], ["na_in",1]] , 0, 1, 0, 0],
         
         ## Voltage Gated K+ Channel 
         # n_a <-> n_b 
-        [ [["ch_k_activator_activate",1]], [["ch_k_activator_inactivate",1]], 1/80, 1/8,0],
-        [ [["ch_k_activator_inactivate",1]], [["ch_k_activator_activate",1]], -1/30, 0.058,0],
+        [ [["ch_k_activator_activate",1]], [["ch_k_activator_inactivate",1]], 1/80, 1/8, 0, 0],
+        [ [["ch_k_activator_inactivate",1]], [["ch_k_activator_activate",1]], -1/30, 0.058, 0, 0],
         
-        # ch_k_inactivate <-> ch_k_activate_rest
-        [ [["ch_k_inactivate",1],["ch_k_activator_activate",4]], [["ch_k_activate_rest",1]] , 0, 1,0],
-        [ [["ch_k_activate_rest",1]], [["ch_k_inactivate",1],["ch_k_activator_activate",4]] , 0, 1,0],
+        # ch_k_inactivate <-> ch_k_activate
+        [ [["ch_k_inactivate",1],["ch_k_activator_activate",4]], [["ch_k_activate",1]] , 0, 1, 0, 0],
+        [ [["ch_k_activate",1]], [["ch_k_inactivate",1],["ch_k_activator_activate",4]] , 0, 1, 0, 0],
         
         # k_in -> k_out by Voltage Gated K+ Channel 
         #by ohm's law
-        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, 1],
+        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, 1, 0],
 
         #by diffusion
-        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, 0],
-        [ [["ch_k_activate",1], ["k_out",1]], [["ch_k_activate",1], ["k_in",1]] , 0, 1, 0],
+        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, 0, 0],
+        [ [["ch_k_activate",1], ["k_out",1]], [["ch_k_activate",1], ["k_in",1]] , 0, 1, 0, 0],
 
 
         ## K+ Leak Channel 
         # k_in <-> k_out by K+ Leak Channel 
         #by diffusion
-        [ [["ch_leak_k_activate",1], ["k_in",1]], [["ch_leak_k_activate",1], ["k_out",1]] , 0, 1, 0],
-        [ [["ch_leak_k_activate",1], ["k_out",1]], [["ch_leak_k_activate",1], ["k_in",1]] , 0, 1, 0],
+        [ [["ch_leak_k_activate",1], ["k_in",1]], [["ch_leak_k_activate",1], ["k_out",1]] , 0, 1, 0, 0],
+        [ [["ch_leak_k_activate",1], ["k_out",1]], [["ch_leak_k_activate",1], ["k_in",1]] , 0, 1, 0, 0],
         
         ## Na+/K+ pump
         # k_in <- k_out , na_in -> na_out by Na+/K+ pump - using energe
-        [ [["ch_na_k_activate",1], ["na_in",3], ["k_out",2], ["atp",1]], [["ch_na_k_activate",1],["na_out",3],["k_in",2] ["adp",1]], 0, 1, 0 ],
+        [ [["ch_na_k_activate",1], ["na_in",3], ["k_out",2], ["atp",1]], [["ch_na_k_activate",1],["na_out",3],["k_in",2], ["adp",1]], 0, 1, 0, 0],
         
         # energe by mitocondria
-        [[["adp",1]],[["atp",1]]],
+        [[["adp",1]],[["atp",1]], 0, 1, 0, 0],
         
     ],
 
     "snode_info" : [
         ["cell_in",\
-         ["na_in", "k_in", "cl_in" ,"minus_protein_in", "ch_na_activator_activate" "ch_na_activator_inactivate","ch_na_inactivator_activate",\
-         "ch_na_inactivator_inactivate", "ch_k_activator_activate", "ch_k_activator_inactivate"], [0,0]],
+            ["na_in", "k_in", "cl_in" ,"minus_protein_in",  "ch_na_activator_activate", "ch_na_activator_inactivate","ch_na_inactivator_activate",\
+                "ch_na_inactivator_inactivate","ch_na_inactivator_activator_activate","ch_na_inactivator_activator_inactivate",\
+                "ch_k_activator_activate", "ch_k_activator_inactivate", "atp", "adp"], [0,0]],
         ["cell_out",\
-         ["na_out","k_out","cl_out"], [0,1]],
+            ["na_out","k_out","cl_out"], [0,1]],
         ["cell_membrane",\
-         ["ch_na_inactivate", "ch_na_activate_run", "ch_na_activate_rest", "ch_na_activator_activate", "ch_k_inactivate", "ch_k_activate_run",\
-          "ch_k_activate_rest", "ch_leak_k_activate_run", "ch_leak_k_activate_rest", "ch_na_k_activate_run", "ch_na_k_activate_rest"], [0,2]]
+            ["ch_na_inactivate", "ch_na_activate", "ch_k_inactivate", "ch_k_activate",\
+                "ch_leak_k_activate",  "ch_na_k_activate"], [0,2]]
     ],
 
-
-
 }
+
+
+
+def make_label( materials ) :
+    label = ''
+    for material_label, n in materials :
+        label = label + str(n)+" "+material_label+" + "
+    return label[:-3]
+
+
+
 neuron_model_info = dict()
 neuron_model_info["node_info"] = list()
 for node_info in neuron_model_info_expression["node_info"] :
@@ -160,17 +169,22 @@ for node_info in neuron_model_info_expression["node_info"] :
 neuron_model_info["edge_info"] = list()
 for edge_info in neuron_model_info_expression["edge_info"] :
     edge_dict = dict()
-    edge_dict["label"] = 
+    edge_dict["label"] = make_label(edge_info[0]) + " => "+ make_label(edge_info[1])
     edge_dict["reactant"] = edge_info[0]
     edge_dict["product"] = edge_info[1]
+    edge_dict["added_energe"] = edge_info[2]  # K3
+    edge_dict["response_coefficient"] = edge_info[3]   # K4
+    edge_dict["ohm_or_diff"] = edge_info[4]  # K5
+    edge_dict["delay_time"] = edge_info[5]  # t
+
     neuron_model_info["edge_info"].append(edge_dict)
 
 neuron_model_info["snode_info"] = list()
 for snode_info in neuron_model_info_expression["snode_info"] :
     snode_dict = dict()
     snode_dict["label"] = snode_info[0]
-    snode_dict["reactant"] = snode_info[1]
-    snode_dict["product"] = snode_info[2]
+    snode_dict["node_included"] = snode_info[1]
+    snode_dict["location"] = snode_info[2]
     neuron_model_info["snode_info"].append(snode_dict)
 
 with open("HX_model.json", 'w', encoding = 'utf-8') as HX_model_file :
