@@ -6,4 +6,5 @@ class Args:
 
 	def __init__(self):
 		#material
-		dt = 0.001
+		self.dt = 0.001
+		self.loc_d=2
