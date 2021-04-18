@@ -7,62 +7,62 @@ neuron_model_info_expression = {
 
     "material_info" : [
         #ion, protein
-        "na",
-        "k",
-        "cl",
-        "minus_protein"
+        ["na"],
+        ["k"],
+        ["cl"],
+        ["minus_protein"],
         
         #channel
-        "ch_na",
-        "ch_k",
-        "ch_leak_k",
-        "ch_na_k"
+        ["ch_na"],
+        ["ch_k"],
+        ["ch_leak_k"],
+        ["ch_na_k"],
         
         #channel activator
-        "ch_na_activator",  #m
-        "ch_na_inactivator",  #h
-        "ch_na_inactivator_activator",  #j
-        "ch_k_activator",   #n
+        ["ch_na_activator"],  #m
+        ["ch_na_inactivator"],  #h
+        ["ch_na_inactivator_activator"],  #j
+        ["ch_k_activator"],   #n
         
         #energe
-        "atp" ,
+        ["atp"] ,
     ],    
 
     "node_info" : [
         #ion, protein
-        ["na_in" ,  [["na",1]], 1, 0 ,  10],
-        ["na_out",  [["na",1]], 1, 0 ,  140],
-        ["k_in",  [["k",1]], 1, 0 , 150],
-        ["k_out",  [["k",1]], 1, 0 , 5],
-        ["cl_in",  [["cl",1]], -1, 0 , 15],
-        ["cl_out",  [["cl",1]], -1, 0 , 100],
-        ["minus_protein_in",  [["minus_protein",1]], 1, 0 , 100],
+        ["na_in" ,  [["na",1]], 1, 0 ,  14/1000],
+        ["na_out",  [["na",1]], 1, 0 ,  140/1000],
+        ["k_in",  [["k",1]], 1, 0 , 120/1000],
+        ["k_out",  [["k",1]], 1, 0 , 4/1000],
+        ["cl_in",  [["cl",1]], -1, 0 , 120/1000],
+        ["cl_out",  [["cl",1]], -1, 0 , 12/1000],
+        ["minus_protein_in",  [["minus_protein",1]], -1, 0 , 100/1000],
         
         # Voltage Gated Na+ Channel
-        ["ch_na_inactivate",  [["ch_na",1]], -1, 0 ,  1],
+        ["ch_na_inactivate",  [["ch_na",1]], -1, 0 ,  1/1000],
         ["ch_na_activate",  [["ch_na",1], ["ch_na_activator",3], ["ch_na_inactivator",1]], 0, 0 , 0],
         ["ch_na_activator_activate",  [["ch_na_activator",1]], 0, 0, 0 ],   # m_a
-        ["ch_na_activator_inactivate",  [["ch_na_activator",1]], 0, 0, 1 ],  # m_b
+        ["ch_na_activator_inactivate",  [["ch_na_activator",1]], 0, 0, 1/1000 ],  # m_b
         ["ch_na_inactivator_activate",  [["ch_na_inactivator",1]], 0, 0, 0 ],  # h_a
-        ["ch_na_inactivator_inactivate",  [["ch_na_inactivator",1], ["ch_na_inactivator_activator",1]], 0, 0, 1 ],  # h_b
+        ["ch_na_inactivator_inactivate",  [["ch_na_inactivator",1], ["ch_na_inactivator_activator",1]], 0, 0, 1/1000 ],  # h_b
         ["ch_na_inactivator_activator_activate",  [["ch_na_inactivator_activator",1]], 0, 0, 0 ],  # j_a
         ["ch_na_inactivator_activator_inactivate",  [["ch_na_inactivator_activator",1]], 0, 0, 0 ],  # j_b
         
         # Voltage Gated K+ Channel 
-        ["ch_k_inactivate",  [["ch_k",1]], 0, 0 , 1],
+        ["ch_k_inactivate",  [["ch_k",1]], 0, 0 , 1/1000],
         ["ch_k_activate",  [["ch_k",1], ["ch_k_activator",4]], 0, 0, 0 ],
         ["ch_k_activator_activate",  [["ch_k_activator",1]], 0, 0, 0 ],  # n_a
-        ["ch_k_activator_inactivate",  [["ch_k_activator",1]], 0, 0, 1 ],  # n_b
+        ["ch_k_activator_inactivate",  [["ch_k_activator",1]], 0, 0, 1/1000 ],  # n_b
         
         # K+ Leak Channel 
-        ["ch_leak_k_activate",  [["ch_leak_k",1]], 0, 0, 1 ],
+        ["ch_leak_k_activate",  [["ch_leak_k",1]], 0, 0, 1/1000 ],
         
         # Na+/K+ pump
-        ["ch_na_k_activate",[["ch_na_k",1]], 0, 0, 1 ],
+        ["ch_na_k_activate",[["ch_na_k",1]], 0, 0, 1/1000 ],
          
          # energe
-         ["atp", [["atp",1]], 0, 0 ,0.5],
-         ["adp", [["atp",1]], 0, 0 ,0.5],
+         ["atp", [["atp",1]], 0, 0 ,0.5/1000],
+         ["adp", [["atp",1]], 0, 0 ,0.5/1000],
     ],
 
     # edge label 규칙
@@ -135,12 +135,12 @@ neuron_model_info_expression = {
         ["cell_in",\
             ["na_in", "k_in", "cl_in" ,"minus_protein_in",  "ch_na_activator_activate", "ch_na_activator_inactivate","ch_na_inactivator_activate",\
                 "ch_na_inactivator_inactivate","ch_na_inactivator_activator_activate","ch_na_inactivator_activator_inactivate",\
-                "ch_k_activator_activate", "ch_k_activator_inactivate", "atp", "adp"], [0,0]],
+                "ch_k_activator_activate", "ch_k_activator_inactivate", "atp", "adp"], [0,0], 100],
         ["cell_out",\
-            ["na_out","k_out","cl_out"], [0,2]],
+            ["na_out","k_out","cl_out"], [0,2], 100],
         ["cell_membrane",\
             ["ch_na_inactivate", "ch_na_activate", "ch_k_inactivate", "ch_k_activate",\
-                "ch_leak_k_activate",  "ch_na_k_activate"], [0,1]]
+                "ch_leak_k_activate",  "ch_na_k_activate"], [0,1], 1]
     ],
 
 }
@@ -185,7 +185,14 @@ for snode_info in neuron_model_info_expression["snode_info"] :
     snode_dict["label"] = snode_info[0]
     snode_dict["node_included"] = snode_info[1]
     snode_dict["location"] = snode_info[2]
+    snode_dict["size"] = snode_info[3]
     neuron_model_info["snode_info"].append(snode_dict)
+
+neuron_model_info["material_info"] = list()
+for material_info in neuron_model_info_expression["material_info"] :
+    material_dict = dict()
+    material_dict["label"] = material_info[0]
+    neuron_model_info["material_info"].append(material_dict)
 
 with open("HX_model.json", 'w', encoding = 'utf-8') as HX_model_file :
     json.dump(neuron_model_info, HX_model_file, indent="\t")
