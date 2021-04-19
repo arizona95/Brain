@@ -1,4 +1,4 @@
 ## BRAIN Ignore File ##
 test.txt
 neuron/config/secret.py
-theory/__pycache__
+theory/__pycache__/*
