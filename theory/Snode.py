@@ -9,6 +9,7 @@ class Snode :
 		self.label = snode_info["label"]
 		self.node_included = snode_info["node_included"]
 		self.loc = snode_info["location"]
+		self.size = snode_info["size"]
 		#self.p = node_info.momentum
 
 
