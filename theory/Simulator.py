@@ -13,6 +13,7 @@ class Simulator :
 	def __init__(self) :
 
 		self.age = 0
+		self.Args = Args()
 		self.graph_snode = collections.OrderedDict()
 		self.graph_node = collections.OrderedDict()
 		self.graph_edge = collections.OrderedDict()
@@ -50,33 +51,42 @@ class Simulator :
 		self.e = len(self.graph_edge)
 		self.s = len(self.graph_snode)
 
-		nodes_initial_density_list = list()
+
+		self.x = pd.Series(np.zeros(self.n), index=self.graph_node.keys())
+		self.dx = pd.Series(np.zeros(self.n), index=self.graph_node.keys())
+		self.q = pd.Series(np.zeros(self.n), index=self.graph_node.keys())
+		self.s_q = pd.DataFrame(np.zeros(( self.s,  self.n )), index=self.graph_snode.keys() , columns=self.graph_node.keys())
+		self.k1 = pd.DataFrame(np.zeros(( self.n,  self.e )), index=self.graph_node.keys() , columns=self.graph_edge.keys())
+		self.k2 = pd.DataFrame(np.zeros(( self.e, self.n )), index=self.graph_edge.keys(), columns=self.graph_node.keys() )
+		self.k4 = pd.Series(np.zeros(self.e), index=self.graph_edge.keys())
+		self.k5 = pd.Series(np.zeros(self.e), index=self.graph_edge.keys())
+		self.loc = pd.DataFrame(np.zeros(( self.s, self.Args.loc_d )), index=self.graph_snode.keys()) 
+
 		for node_label, node in self.graph_node.items() :
-			nodes_initial_density_list.append(node.c)
+			self.x[node_label] = node.c
+			self.q[node_label] = node.q
 
+		for edge_label, edge in self.graph_edge.items():
+			self.k4[edge_label] = edge.k4
+			self.k5[edge_label] = edge.k5
 
-		self.x = pd.DataFrame(nodes_initial_density_list, index=self.graph_node.keys())
+			for reactant in edge.r :
+				self.k1[edge_label][reactant[0]] = -reactant[1]
+				self.k2[reactant[0]][edge_label] = reactant[1]
+		
+			for product in edge.p :
+				self.k1[edge_label][product[0]] = product[1]
+
+		for snode_label, snode in self.graph_snode.items():
+			for d in range(self.Args.loc_d) :
+				self.loc[d][snode_label]= snode.loc[d]
+
+			for node_label in snode.node_included :
+				self.s_q[node_label][snode_label] = self.q[node_label]
 
 		self.e_x = np.exp(self.x)
-
-		self.k1 = pd.DataFrame(np.zeros(( self.e, self.n )), index=self.graph_edge.keys(), columns=self.graph_node.keys())
-		for edge_label, edge in self.graph_edge.items():
-			for reactant in edge.r :
-				self.k1[reactant[0]][edge_label] = -reactant[1]
+		self.one_k5 = 1-self.k5
 		
-			for product in edge.r :
-				self.k1[product[0]][edge_label] = product[1]
-
-		self.k2 = pd.DataFrame(np.zeros(( self.n, self.e )), index=self.graph_node.keys(), columns=self.graph_edge.keys())
-		for edge_label, edge in self.graph_edge.items():
-			for reactant in edge.r :
-				self.k1[edge_label][reactant[0]] = reactant[1]
-
-		edges_additional_potential_energe_list = list()
-		for edge_label, edge in self.graph_edge.items() :
-			edges_additional_potential_energe_list.append(edge.k3)
-		self.k3 = pd.DataFrame(edges_additional_potential_energe_list, index=self.graph_edge.keys(), columns=self.graph_snode.keys())
-
 
 
 

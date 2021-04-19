@@ -137,10 +137,10 @@ neuron_model_info_expression = {
                 "ch_na_inactivator_inactivate","ch_na_inactivator_activator_activate","ch_na_inactivator_activator_inactivate",\
                 "ch_k_activator_activate", "ch_k_activator_inactivate", "atp", "adp"], [0,0]],
         ["cell_out",\
-            ["na_out","k_out","cl_out"], [0,1]],
+            ["na_out","k_out","cl_out"], [0,2]],
         ["cell_membrane",\
             ["ch_na_inactivate", "ch_na_activate", "ch_k_inactivate", "ch_k_activate",\
-                "ch_leak_k_activate",  "ch_na_k_activate"], [0,2]]
+                "ch_leak_k_activate",  "ch_na_k_activate"], [0,1]]
     ],
 
 }
