@@ -72,12 +72,12 @@ class Simulator :
 		self.dx = pd.Series(np.zeros(self.n), index=self.graph_node.keys())
 		self.q = pd.Series(np.zeros(self.n), index=self.graph_node.keys())
 		self.s_q = pd.DataFrame(np.zeros(( self.s,  self.n )), index=self.graph_snode.keys() , columns=self.graph_node.keys())
-		self.d = pd.DataFrame(np.zeros(( self.s,  self.s )), index=self.graph_snode.keys() , columns=self.graph_snode.keys())
 		self.k1 = pd.DataFrame(np.zeros(( self.n,  self.e )), index=self.graph_node.keys() , columns=self.graph_edge.keys())
 		self.k2 = pd.DataFrame(np.zeros(( self.e, self.n )), index=self.graph_edge.keys(), columns=self.graph_node.keys() )
+		self.k3 = pd.DataFrame(np.zeros(( self.e,  self.s )), index=self.graph_edge.keys() , columns=self.graph_snode.keys())
 		self.k4 = pd.Series(np.zeros(self.e), index=self.graph_edge.keys())
 		self.k5 = pd.Series(np.zeros(self.e), index=self.graph_edge.keys())
-		self.loc = pd.DataFrame(np.zeros(( self.s, self.Args.loc_d )), index=self.graph_snode.keys()) 
+		#self.loc = pd.DataFrame(np.zeros(( self.s, self.Args.loc_d )), index=self.graph_snode.keys()) 
 		self.s_matrix = pd.DataFrame(np.zeros(( self.s,  self.n )), index=self.graph_snode.keys() , columns=self.graph_node.keys())
 		self.m_matrix = pd.DataFrame(np.zeros(( self.n,  self.m )), index=self.graph_node.keys() , columns=self.material.keys())
 
@@ -99,26 +99,28 @@ class Simulator :
 				self.k1[edge_label][product[0]] = product[1]
 
 		for snode_label, snode in self.graph_snode.items():
-			for d in range(self.Args.loc_d) :
-				self.loc[d][snode_label]= snode.loc[d]
+			#for d in range(self.Args.loc_d) :
+			#	self.loc[d][snode_label]= snode.loc[d]
 
 			for node_label in snode.node_included :
 				self.s_matrix[node_label][snode_label] =1
 				self.s_q[node_label][snode_label] = self.q[node_label]
 				self.x_s[node_label] = self.graph_snode[snode_label].size
 
-		for snode_label_from, snode_from in self.graph_snode.items():
-			for snode_label_to, snode_to in self.graph_snode.items():
-				if snode_label_from != snode_label_to :
-					fl = self.loc.T[snode_label_from]
-					tl = self.loc.T[snode_label_to]
-					dis = math.sqrt(((fl-tl)*(fl-tl)).sum())
-					#ef = (1/(dis+0.000001))*(fl-tl)
-
-					self.d[snode_label_from][snode_label_to] = 1/dis
+		#for snode_label_from, snode_from in self.graph_snode.items():
+		#	for snode_label_to, snode_to in self.graph_snode.items():
+		#		if snode_label_from != snode_label_to :
+		#			fl = self.loc.T[snode_label_from]
+		#			tl = self.loc.T[snode_label_to]
+		#			dis = math.sqrt(((fl-tl)*(fl-tl)).sum())
+		#			#ef = (1/(dis+0.000001))*(fl-tl)
+		#
+		#			self.d[snode_label_from][snode_label_to] = 1/dis
 
 		self.e_x = np.exp(self.x)
 		self.one_k5 = 1-self.k5
+
+		# self.k3 # makeit!!!!!
 		
 		# maintain materials
 		self.init_materials =self.m_matrix.T.dot(self.x * self.x_s) 
@@ -126,11 +128,9 @@ class Simulator :
 
 	def one_step(self) :
 
-		self.Q = self.s_q.dot(self.x )
-		self.E = self.d.dot( self.s_q.dot(self.x ))
-		self.V = self.E.dot(self.q)
+		self.V = self.k3.dot(self.d.dot( self.s_q.dot(self.x * self.x_s )))
 
-		self.dx = self.k1 * ( np.exp( self.k2 * np.log(self.x) + K3 * self.E ) * self.k4 * ( self.k5* self.T + self.one_k5 * self.V ) )
+		self.dx = self.k1 * ( np.exp( self.k2 * np.log(self.x) +  self.V ) * self.k4 * ( self.k5* self.T + self.one_k5 * self.V ) )
 
 		self.x = self.x + self.dx
 		self.age = self.age+1
