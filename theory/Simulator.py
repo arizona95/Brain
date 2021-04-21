@@ -120,7 +120,7 @@ class Simulator :
 		self.e_x = np.exp(self.x)
 		self.one_k5 = 1-self.k5
 
-		# self.k3 # makeit!!!!!
+		self.k3 # makeit!!!!!
 		
 		# maintain materials
 		self.init_materials =self.m_matrix.T.dot(self.x * self.x_s) 
