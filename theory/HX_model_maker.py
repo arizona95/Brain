@@ -73,61 +73,61 @@ neuron_model_info_expression = {
     "edge_info" : [
         ## Voltage Gated Na+ Channel
         # m_a <-> m_b 
-        [ [["ch_na_activator_activate",1]], [["ch_na_activator_inactivate",1]], 1/18, 4, 0, 0],
-        [ [["ch_na_activator_inactivate",1]], [["ch_na_activator_activate",1]], -1/20,  0.22, 0, 0],
+        [ [["ch_na_activator_activate",1]], [["ch_na_activator_inactivate",1]], 1/18, 4, [], 0],
+        [ [["ch_na_activator_inactivate",1]], [["ch_na_activator_activate",1]], -1/20,  0.22, [], 0],
         
         # j_a <-> j_b
-        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 1/10, 20, 0, 0],
-        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 0, 1, 0, 0],
+        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 1/10, 20, [], 0],
+        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1]], 0, 1, [], 0],
 
         # h_a <-> h_b 
-        [ [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_inactivate",1]], 0, 1, 0, 0],
-        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], 1/20, 7/100, 0, 0],
+        [ [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_inactivate",1]], 0, 1, [], 0],
+        [ [["ch_na_inactivator_inactivate",1]], [["ch_na_inactivator_activate",1], ["ch_na_inactivator_inactivate",1]], 1/20, 7/100, [], 0],
         
         # ch_na_inactivate <-> ch_na_activate
-        [ [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]], [["ch_na_activate",1]] , 0, 1, 0, 0],
-        [ [["ch_na_activate",1]], [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]] , 0, 1, 0, 0],
+        [ [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]], [["ch_na_activate",1]] , 0, 1,[], 0],
+        [ [["ch_na_activate",1]], [["ch_na_inactivate",1],["ch_na_activator_activate",3],["ch_na_inactivator_activate",1]] , 0, 1, [], 0],
         
         # na_in <- na_out by Voltage Gated Na+ Channel
         #by ohm's law
         # j = (row) * v 
         # v = -(mu) * E
-        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, 1, 0],
+        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, ["membrane_potential"], 0],
 
         #by diffusion
-        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, 0, 0],
-        [ [["ch_na_activate",1], ["na_out",1]], [["ch_na_activate",1], ["na_in",1]] , 0, 1, 0, 0],
+        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, [], 0],
+        [ [["ch_na_activate",1], ["na_out",1]], [["ch_na_activate",1], ["na_in",1]] , 0, 1, [], 0],
         
         ## Voltage Gated K+ Channel 
         # n_a <-> n_b 
-        [ [["ch_k_activator_activate",1]], [["ch_k_activator_inactivate",1]], 1/80, 1/8, 0, 0],
-        [ [["ch_k_activator_inactivate",1]], [["ch_k_activator_activate",1]], -1/30, 0.058, 0, 0],
+        [ [["ch_k_activator_activate",1]], [["ch_k_activator_inactivate",1]], 1/80, 1/8, [], 0],
+        [ [["ch_k_activator_inactivate",1]], [["ch_k_activator_activate",1]], -1/30, 0.058, [], 0],
         
         # ch_k_inactivate <-> ch_k_activate
-        [ [["ch_k_inactivate",1],["ch_k_activator_activate",4]], [["ch_k_activate",1]] , 0, 1, 0, 0],
-        [ [["ch_k_activate",1]], [["ch_k_inactivate",1],["ch_k_activator_activate",4]] , 0, 1, 0, 0],
+        [ [["ch_k_inactivate",1],["ch_k_activator_activate",4]], [["ch_k_activate",1]] , 0, 1, [], 0],
+        [ [["ch_k_activate",1]], [["ch_k_inactivate",1],["ch_k_activator_activate",4]] , 0, 1, [], 0],
         
         # k_in -> k_out by Voltage Gated K+ Channel 
         #by ohm's law
-        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, 1, 0],
+        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, ["membrane_potential"], 0],
 
         #by diffusion
-        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, 0, 0],
-        [ [["ch_k_activate",1], ["k_out",1]], [["ch_k_activate",1], ["k_in",1]] , 0, 1, 0, 0],
+        [ [["ch_k_activate",1], ["k_in",1]], [["ch_k_activate",1], ["k_out",1]] , 0, 1, [], 0],
+        [ [["ch_k_activate",1], ["k_out",1]], [["ch_k_activate",1], ["k_in",1]] , 0, 1, [], 0],
 
 
         ## K+ Leak Channel 
         # k_in <-> k_out by K+ Leak Channel 
         #by diffusion
-        [ [["ch_leak_k_activate",1], ["k_in",1]], [["ch_leak_k_activate",1], ["k_out",1]] , 0, 1, 0, 0],
-        [ [["ch_leak_k_activate",1], ["k_out",1]], [["ch_leak_k_activate",1], ["k_in",1]] , 0, 1, 0, 0],
+        [ [["ch_leak_k_activate",1], ["k_in",1]], [["ch_leak_k_activate",1], ["k_out",1]] , 0, 1, [], 0],
+        [ [["ch_leak_k_activate",1], ["k_out",1]], [["ch_leak_k_activate",1], ["k_in",1]] , 0, 1, [], 0],
         
         ## Na+/K+ pump
         # k_in <- k_out , na_in -> na_out by Na+/K+ pump - using energe
-        [ [["ch_na_k_activate",1], ["na_in",3], ["k_out",2], ["atp",1]], [["ch_na_k_activate",1],["na_out",3],["k_in",2], ["adp",1]], 0, 1, 0, 0],
+        [ [["ch_na_k_activate",1], ["na_in",3], ["k_out",2], ["atp",1]], [["ch_na_k_activate",1],["na_out",3],["k_in",2], ["adp",1]], 0, 1, [], 0],
         
         # energe by mitocondria
-        [[["adp",1]],[["atp",1]], 0, 1, 0, 0],
+        [[["adp",1]],[["atp",1]], 0, 1, [], 0],
         
     ],
 
@@ -142,6 +142,10 @@ neuron_model_info_expression = {
             ["ch_na_inactivate", "ch_na_activate", "ch_k_inactivate", "ch_k_activate",\
                 "ch_leak_k_activate",  "ch_na_k_activate"], [0,1], 1]
     ],
+
+    "voltage_info" :[
+        ["membrane_potential", [["cell_in",1], ["cell_out",-1]]]
+    ]
 
 }
 

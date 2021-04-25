@@ -25,6 +25,7 @@ class Simulator :
 		self.n = None # node num
 		self.e = None # edge num
 		self.s = None # space num
+		self.v = None # voltage num
 		self.m = None # material num
 
 		self.s_matrix = None # space-node matrix
@@ -63,6 +64,7 @@ class Simulator :
 
 		self.n = len(self.graph_node)
 		self.e = len(self.graph_edge)
+		self.v = 1
 		self.s = len(self.graph_snode)
 		self.m = len(self.material)
 
@@ -74,9 +76,11 @@ class Simulator :
 		self.s_q = pd.DataFrame(np.zeros(( self.s,  self.n )), index=self.graph_snode.keys() , columns=self.graph_node.keys())
 		self.k1 = pd.DataFrame(np.zeros(( self.n,  self.e )), index=self.graph_node.keys() , columns=self.graph_edge.keys())
 		self.k2 = pd.DataFrame(np.zeros(( self.e, self.n )), index=self.graph_edge.keys(), columns=self.graph_node.keys() )
-		self.k3 = pd.DataFrame(np.zeros(( self.e,  self.s )), index=self.graph_edge.keys() , columns=self.graph_snode.keys())
+		self.kv = pd.DataFrame(np.zeros(( self.v,  self.s )), index=self.graph_edge.keys() , columns=self.graph_snode.keys())
+		self.k3 = pd.DataFrame(np.zeros(( self.e,  self.v )), index=self.graph_edge.keys() , columns=self.graph_snode.keys())
 		self.k4 = pd.Series(np.zeros(self.e), index=self.graph_edge.keys())
 		self.k5 = pd.Series(np.zeros(self.e), index=self.graph_edge.keys())
+		self.k6 = pd.DataFrame(np.zeros(( self.e,  self.v )), index=self.graph_edge.keys() , columns=self.graph_snode.keys())
 		#self.loc = pd.DataFrame(np.zeros(( self.s, self.Args.loc_d )), index=self.graph_snode.keys()) 
 		self.s_matrix = pd.DataFrame(np.zeros(( self.s,  self.n )), index=self.graph_snode.keys() , columns=self.graph_node.keys())
 		self.m_matrix = pd.DataFrame(np.zeros(( self.n,  self.m )), index=self.graph_node.keys() , columns=self.material.keys())
