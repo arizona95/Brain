@@ -92,7 +92,8 @@ neuron_model_info_expression = {
         #by ohm's law
         # j = (row) * v 
         # v = -(mu) * E
-        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, ["membrane_potential"], 0],
+        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, ["cell_out"], 0],
+        [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, ["cell_in"], 0],
 
         #by diffusion
         [ [["ch_na_activate",1], ["na_in",1]], [["ch_na_activate",1], ["na_out",1]] , 0, 1, [], 0],
@@ -142,10 +143,6 @@ neuron_model_info_expression = {
             ["ch_na_inactivate", "ch_na_activate", "ch_k_inactivate", "ch_k_activate",\
                 "ch_leak_k_activate",  "ch_na_k_activate"], [0,1], 1]
     ],
-
-    "voltage_info" :[
-        ["membrane_potential", [["cell_in",1], ["cell_out",-1]]]
-    ]
 
 }
 
