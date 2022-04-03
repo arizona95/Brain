@@ -2,3 +2,4 @@
 test.txt
 neuron/config/secret.py
 theory/__pycache__/*
+pySB/data/*
