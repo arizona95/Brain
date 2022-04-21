@@ -20,7 +20,9 @@ import pandas as pd
 from IPython.display import display, HTML
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
-
+import neat
+import visualize
+import graphviz
 
 class MultiEnvEvaluator:
     def __init__(self, make_net, activate_net, batch_size=1, max_env_steps=None, make_env=None, envs=None):
@@ -218,11 +220,8 @@ class MultiEnvEvaluator:
                     for n , node_name_n in enumerate(space_node[space_name_i]) :
                         for m, node_name_m in enumerate(space_node[space_name_j]) :
                             if node_name_n == node_name_m :
-                                input_vector = c_0 +\
-                                               space_node[space_name_i][node_name_n] +\
-                                               si +\
-                                               space_node[space_name_j][node_name_m] +\
-                                               sj
+                                input_vector = c_0 + space_node[space_name_i][node_name_n] +\
+                                               si + space_node[space_name_j][node_name_m] + sj
 
                                 ##print(f"input_vector: {input_vector}")
                                 #diff edge
@@ -327,6 +326,7 @@ class MultiEnvEvaluator:
 
         ### print, display
 
+        '''
         print(f"react_rules : {react_rules}")
         print(f"G set : {G}")
         print(f"A set : {A}")
@@ -337,8 +337,61 @@ class MultiEnvEvaluator:
         for v in sim :
             print(v)
             display(sim[v])
+        
+        '''
+
 
         ## graph display
+
+        display(sim["M_"])
+
+        # gene graph
+        node_names = {}
+        stats = neat.StatisticsReporter()
+        visualize.draw_net(config, genome, True, node_names=node_names)
+
+        # sim graph
+
+        g = graphviz.Graph('G', filename='../graph/test.gv')
+
+        subgraph_dict = dict()
+
+        for i, space_name_i in enumerate(space_node):
+            with g.subgraph(name = "cluster"+space_name_i) as c :
+                c.attr(color='blue')
+                for node_name in space_node[space_name_i] :
+                    c.node(node_name+self.gene_space_separator+space_name_i, label=node_name)
+                c.attr(label = space_name_i)
+                subgraph_dict[space_name_i] = c
+
+        g.attr('node', shape='diamond', style='filled', color='lightgrey')
+        for edge_name in sim["M_"] :
+            # chemical edge
+            if "r" in edge_name :
+                react_rule_name, space_name = edge_name.split(self.gene_space_separator)
+
+                subgraph_dict[space_name].node(edge_name, label = react_rule_name)
+                reactant_name_0 = to_string(react_rules[react_rule_name]['rule'][0]) + self.gene_space_separator + space_name
+                reactant_name_1 = to_string(react_rules[react_rule_name]['rule'][1]) + self.gene_space_separator + space_name
+                component_name = to_string(react_rules[react_rule_name]['rule'][2]) + self.gene_space_separator + space_name
+
+                g.edge(reactant_name_0, edge_name)
+                g.edge(reactant_name_1, edge_name)
+                g.edge(component_name, edge_name)
+
+            else :
+                node_name, space_name_0, space_name_1 = edge_name.split(self.gene_space_separator)
+                node_name_0 = node_name + self.gene_space_separator + space_name_0
+                node_name_1 = node_name + self.gene_space_separator + space_name_1
+                g.edge(node_name_0, node_name_1)
+
+
+
+
+
+
+        display(g)
+        #g.view()
 
         ## simulate condition
 
@@ -414,13 +467,14 @@ class MultiEnvEvaluator:
         cmap = get_cmap(len(node))
 
         for i,node_name in enumerate(node) :
-            plt.plot(t, xp[:, i], cmap(i), label=node_name)
+            plt.plot(t, xp[:, i], color=cmap(i), label=node_name)
         plt.xlabel('time')
         plt.legend(loc='best')
         plt.show()
 
-        print(xp[0, :5])
-        print(xp[-1, :5])
+
+        print(xp[0,:])
+
 
         sys.exit()
 
