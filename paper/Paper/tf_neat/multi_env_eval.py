@@ -40,6 +40,9 @@ class MultiEnvEvaluator:
         self.max_state = 5
         self.vector_separator = "/"
         self.gene_space_separator = "-"
+        self.chemical_flow_character = "r"
+        self.diffusion_flow_character = "d"
+        self.hamiltonian_flow_character = "h"
 
 
     def eval_genome(self, genome, config, debug=False):
@@ -95,7 +98,7 @@ class MultiEnvEvaluator:
                     if react_or_not >=0 :
                         new_g = list(np.array(gi[:-1])+np.array(gj[:-1]))+[int(react_or_not)]
                         add_G.append(new_g)
-                        react_rules["r"+str(rule_num)] = {
+                        react_rules[self.chemical_flow_character+str(rule_num)] = {
                             "rule": [gi,gj, new_g],
                             "k" : react_rate,
                         }
@@ -195,6 +198,8 @@ class MultiEnvEvaluator:
                     to_string(react_rule[1]) in space_node[space_name] and \
                     to_string(react_rule[2]) in space_node[space_name] :
 
+                    edge_name = react_rule_name + self.gene_space_separator + space_name
+
                     #add M_T
                     M_T_add = dict()
                     for node_name in node:
@@ -202,13 +207,13 @@ class MultiEnvEvaluator:
                     M_T_add[to_string(react_rule[0])+self.gene_space_separator+space_name] += 1
                     M_T_add[to_string(react_rule[1])+self.gene_space_separator+space_name] += 1
                     M_T_add[to_string(react_rule[2])+self.gene_space_separator+space_name] = -1
-                    M_T[react_rule_name + self.gene_space_separator + space_name] = M_T_add
+                    M_T[edge_name] = M_T_add
 
                     # add k
-                    k[react_rule_name + self.gene_space_separator + space_name] = react_rules[react_rule_name]["k"]
+                    k[edge_name] = react_rules[react_rule_name]["k"]
 
                     # add v
-                    v[react_rule_name + self.gene_space_separator + space_name] = 0
+                    v[edge_name] = 0
 
         ## diffusion flow, hamiltonian flow : different space
         for i, space_name_i in enumerate(space_node):
@@ -228,49 +233,47 @@ class MultiEnvEvaluator:
                                 diff_k = 2*float(net_output(input_vector)[11])-1
                                 if diff_k >0 : # edge connect
 
+                                    edge_name = self.diffusion_flow_character + \
+                                                self.gene_space_separator + node_name_n + \
+                                                self.gene_space_separator + space_name_j + \
+                                                self.gene_space_separator + space_name_i
+
                                     # add M_T
                                     M_T_add = dict()
                                     for node_name in node:
                                         M_T_add[node_name] = 0
                                     M_T_add[node_name_n + self.gene_space_separator + space_name_i] = 1
                                     M_T_add[node_name_m + self.gene_space_separator + space_name_j] = -1
-                                    M_T[node_name_n+\
-                                        self.gene_space_separator + space_name_j +\
-                                        self.gene_space_separator + space_name_i] = M_T_add
+                                    M_T[edge_name] = M_T_add
 
                                     # add k
-                                    k[node_name_n+\
-                                        self.gene_space_separator + space_name_j +\
-                                        self.gene_space_separator + space_name_i] = diff_k
+                                    k[edge_name] = diff_k
 
                                     # add v
-                                    v[node_name_n+\
-                                        self.gene_space_separator + space_name_j +\
-                                        self.gene_space_separator + space_name_i] = 0
+                                    v[edge_name] = 0
 
                                 #hamilt edge
                                 hamilt_k = 2 * float(net_output(input_vector)[12]) - 1
                                 if hamilt_k>0 : # edge connect
 
+                                    edge_name = self.hamiltonian_flow_character + \
+                                                self.gene_space_separator + node_name_n + \
+                                                self.gene_space_separator + space_name_j + \
+                                                self.gene_space_separator + space_name_i
+
                                     # add M_T
                                     M_T_add = dict()
                                     for node_name in node:
                                         M_T_add[node_name] = 0
                                     M_T_add[node_name_n + self.gene_space_separator + space_name_i] = 1
                                     M_T_add[node_name_m + self.gene_space_separator + space_name_j] = -1
-                                    M_T[node_name_n + \
-                                        self.gene_space_separator + space_name_j + \
-                                        self.gene_space_separator + space_name_i] = M_T_add
+                                    M_T[edge_name] = M_T_add
 
                                     # add k
-                                    k[node_name_n + \
-                                      self.gene_space_separator + space_name_j + \
-                                      self.gene_space_separator + space_name_i] = 0
+                                    k[edge_name] = 0
 
                                     # add v
-                                    v[node_name_n + \
-                                      self.gene_space_separator + space_name_j + \
-                                      self.gene_space_separator + space_name_i] = hamilt_k
+                                    v[edge_name] = hamilt_k
 
 
         # make simulator entity
@@ -352,25 +355,29 @@ class MultiEnvEvaluator:
 
         # sim graph
 
-        g = graphviz.Graph('G', filename='../graph/test.gv')
+        g = graphviz.Graph('G', filename='../graph/test.gv', engine ='fdp')
 
-        subgraph_dict = dict()
-
+        #node
         for i, space_name_i in enumerate(space_node):
             with g.subgraph(name = "cluster"+space_name_i) as c :
                 c.attr(color='blue')
                 for node_name in space_node[space_name_i] :
                     c.node(node_name+self.gene_space_separator+space_name_i, label=node_name)
                 c.attr(label = space_name_i)
-                subgraph_dict[space_name_i] = c
 
-        g.attr('node', shape='diamond', style='filled', color='lightgrey')
+                c.attr('node', shape='diamond', style='filled', color='lightgrey')
+                for edge_name in sim["M_"]:
+                    # chemical edge
+                    if self.chemical_flow_character in edge_name:
+                        react_rule_name, space_name = edge_name.split(self.gene_space_separator)
+                        if space_name_i == space_name :
+                            c.node(edge_name, label = react_rule_name)
+
+        #edge
         for edge_name in sim["M_"] :
             # chemical edge
-            if "r" in edge_name :
+            if self.chemical_flow_character in edge_name :
                 react_rule_name, space_name = edge_name.split(self.gene_space_separator)
-
-                subgraph_dict[space_name].node(edge_name, label = react_rule_name)
                 reactant_name_0 = to_string(react_rules[react_rule_name]['rule'][0]) + self.gene_space_separator + space_name
                 reactant_name_1 = to_string(react_rules[react_rule_name]['rule'][1]) + self.gene_space_separator + space_name
                 component_name = to_string(react_rules[react_rule_name]['rule'][2]) + self.gene_space_separator + space_name
@@ -380,10 +387,13 @@ class MultiEnvEvaluator:
                 g.edge(component_name, edge_name)
 
             else :
-                node_name, space_name_0, space_name_1 = edge_name.split(self.gene_space_separator)
+                diff_or_hamilt, node_name, space_name_0, space_name_1 = edge_name.split(self.gene_space_separator)
                 node_name_0 = node_name + self.gene_space_separator + space_name_0
                 node_name_1 = node_name + self.gene_space_separator + space_name_1
-                g.edge(node_name_0, node_name_1)
+                if diff_or_hamilt == self.diffusion_flow_character :
+                    g.edge(node_name_0, node_name_1, style="dashed")
+                if diff_or_hamilt == self.hamiltonian_flow_character :
+                    g.edge(node_name_0, node_name_1, style="bold")
 
 
 
